@@ -1,7 +1,7 @@
 # mealnova-web
 
 Mealnova public website — Next.js 15 (App Router), Tailwind CSS v4, next-intl (`/en`, `/hi`, `/mr`),
-TanStack Query. Talks to [mealnova-api](https://github.com/yogeshn/mealnova-api) over HTTPS.
+TanStack Query. Talks to [mealnova-api](https://github.com/mealnova/mealnova-api) over HTTPS.
 
 ## Quickstart
 
@@ -15,7 +15,7 @@ pnpm dev                        # http://localhost:3000 → redirects to /en
 
 Consumed from the **committed `vendor/` copies** (`file:vendor/...`) — installs work in CI, Vercel,
 and fresh clones with no registry token. To pick up changes from
-[mealnova-shared](https://github.com/yogeshn/mealnova-shared):
+[mealnova-shared](https://github.com/mealnova/mealnova-shared):
 
 ```bash
 # with mealnova-shared cloned + built as a sibling directory
