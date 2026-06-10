@@ -10,12 +10,13 @@
     "start": "next start",
     "lint": "next lint",
     "snapshot": "node scripts/fetch-content-snapshot.mjs",
-    "clean": "rm -rf .next node_modules"
+    "clean": "rm -rf .next node_modules",
+    "vendor:update": "node scripts/vendor-shared.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@mealnova/shared": "^0.1.0",
-    "@mealnova/types": "^0.1.0",
+    "@mealnova/shared": "file:vendor/shared",
+    "@mealnova/types": "file:vendor/types",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
