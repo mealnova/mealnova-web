@@ -1,0 +1,34 @@
+{
+  "common": {
+    "siteName": "",
+    "tagline": "",
+    "phone": "",
+    "email": "",
+    "orderNow": "ऑर्डर करा",
+    "viewMenu": "मेन्यू पहा",
+    "getQuote": "कोटेशन मिळवा",
+    "learnMore": "अधिक जाणा"
+  },
+  "nav": {
+    "home": "होम",
+    "menu": "मेन्यू",
+    "dailyMeals": "रोजचे जेवण",
+    "eventCatering": "इव्हेंट कॅटरिंग",
+    "corporateCatering": "कॉर्पोरेट कॅटरिंग",
+    "about": "आमच्याबद्दल",
+    "contact": "संपर्क",
+    "locations": "ठिकाणे",
+    "orderOnline": "ऑनलाइन ऑर्डर",
+    "blog": "ब्लॉग",
+    "careers": "करिअर",
+    "faq": "प्रश्न-उत्तरे"
+  },
+  "footer": {
+    "description": "",
+    "quickLinks": "जलद दुवे",
+    "services": "सेवा",
+    "contact": "संपर्क करा",
+    "fssai": "FSSAI परवानाधारक",
+    "copyright": ""
+  }
+}

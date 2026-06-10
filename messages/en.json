@@ -1,0 +1,34 @@
+{
+  "common": {
+    "siteName": "",
+    "tagline": "",
+    "phone": "",
+    "email": "",
+    "orderNow": "Order Now",
+    "viewMenu": "View Menu",
+    "getQuote": "Get a Quote",
+    "learnMore": "Learn More"
+  },
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "dailyMeals": "Daily Meals",
+    "eventCatering": "Event Catering",
+    "corporateCatering": "Corporate Catering",
+    "about": "About Us",
+    "contact": "Contact",
+    "locations": "Locations",
+    "orderOnline": "Order Online",
+    "blog": "Blog",
+    "careers": "Careers",
+    "faq": "FAQ"
+  },
+  "footer": {
+    "description": "",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "contact": "Contact Us",
+    "fssai": "FSSAI Licensed",
+    "copyright": ""
+  }
+}
