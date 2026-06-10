@@ -335,13 +335,13 @@ type StoryFeature = {
 };
 
 const storyIcons = [
-  <ChefHat className="h-6 w-6" />,
-  <Leaf className="h-6 w-6" />,
-  <Building2 className="h-6 w-6" />,
-  <ShieldCheck className="h-6 w-6" />,
-  <Clock3 className="h-6 w-6" />,
-  <CalendarDays className="h-6 w-6" />,
-  <MapPin className="h-6 w-6" />,
+  <ChefHat key="chef-hat" className="h-6 w-6" />,
+  <Leaf key="leaf" className="h-6 w-6" />,
+  <Building2 key="building" className="h-6 w-6" />,
+  <ShieldCheck key="shield-check" className="h-6 w-6" />,
+  <Clock3 key="clock" className="h-6 w-6" />,
+  <CalendarDays key="calendar-days" className="h-6 w-6" />,
+  <MapPin key="map-pin" className="h-6 w-6" />,
 ];
 
 function buildStorySections(blocks: ParsedBlock[]): StoryContentSection[] {

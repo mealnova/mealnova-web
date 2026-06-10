@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import {
   CheckCircle2,
@@ -266,13 +267,13 @@ export default function DailyMenuPage() {
             >
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button variant="primary" size="lg" asChild>
-                  <a href="/corporate">
+                  <Link href="/corporate">
                     Start onboarding
                     <CheckCircle2 className="h-4 w-4" />
-                  </a>
+                  </Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <a href="/menu">Browse menu</a>
+                  <Link href="/menu">Browse menu</Link>
                 </Button>
               </div>
             </InfoCard>
