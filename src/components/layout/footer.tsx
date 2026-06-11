@@ -114,12 +114,12 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="relative bg-[var(--color-surface-dark)] pb-8 pt-0 text-white">
+    <footer className="relative border-t border-[var(--color-text-primary)]/8 bg-white pb-8 pt-0 text-[var(--color-text-primary)]">
       {/* CTA Banner */}
-      <div className="border-b border-white/[0.06]">
+      <div className="border-b border-[var(--color-text-primary)]/8">
         {resolvedContent.hero?.title ? (
           <div className="container-max py-12 lg:py-16">
-            <div className="relative overflow-hidden rounded-xl border border-white/[0.06] bg-[linear-gradient(145deg,var(--dp-from),var(--dp-to))] px-8 py-8 lg:px-12 lg:py-10">
+            <div className="relative overflow-hidden rounded-xl border border-[var(--color-primary-500)]/15 bg-[var(--color-primary-50)] px-8 py-8 lg:px-12 lg:py-10">
               <div className="absolute left-0 right-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--color-secondary-500)]/50 to-transparent" />
 
               <div className="relative grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -130,13 +130,13 @@ export function Footer() {
                     </div>
                   ) : null}
                   <h2
-                    className="mt-4 text-[clamp(1.5rem,3vw,2.5rem)] leading-tight font-normal tracking-[-0.02em] text-white"
+                    className="mt-4 text-[clamp(1.5rem,3vw,2.5rem)] leading-tight font-normal tracking-[-0.02em] text-[var(--color-text-primary)]"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {resolvedContent.hero.title}
                   </h2>
                   {resolvedContent.hero?.description ? (
-                    <p className="mt-4 text-sm leading-relaxed text-white/45 lg:text-base">
+                    <p className="mt-4 text-sm leading-relaxed text-[var(--color-text-secondary)] lg:text-base">
                       {resolvedContent.hero.description}
                     </p>
                   ) : null}
@@ -159,7 +159,7 @@ export function Footer() {
 
       {/* Main footer grid */}
       <div className="container-max py-12">
-        <div className="grid gap-10 border-b border-white/[0.06] pb-10 lg:grid-cols-[1.2fr_.8fr_.8fr_.9fr]">
+        <div className="grid gap-10 border-b border-[var(--color-text-primary)]/8 pb-10 lg:grid-cols-[1.2fr_.8fr_.8fr_.9fr]">
           {/* Brand column */}
           <div>
             <div className="flex items-center gap-3">
@@ -167,16 +167,16 @@ export function Footer() {
                 {initials}
               </span>
               <div>
-                <div className="text-[10px] font-medium uppercase tracking-[0.15em] text-white/30">
+                <div className="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--color-text-muted)]">
                   {resolvedContent.sinceLabel ?? ""}
                 </div>
-                <div className="text-sm font-semibold tracking-[-0.02em] text-white">
+                <div className="text-sm font-semibold tracking-[-0.02em] text-[var(--color-text-primary)]">
                   {siteName}
                 </div>
               </div>
             </div>
             {resolvedContent.brandDescription ? (
-              <p className="mt-5 max-w-md text-sm leading-relaxed text-white/40">
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-[var(--color-text-secondary)]">
                 {resolvedContent.brandDescription}
               </p>
             ) : null}
@@ -185,7 +185,7 @@ export function Footer() {
                 {(resolvedContent.coverage ?? []).map((area) => (
                   <span
                     key={area}
-                    className="rounded-md border border-white/[0.06] bg-white/[0.03] px-3 py-1.5 text-[11px] font-medium text-white/35 transition-colors hover:bg-white/[0.06] hover:text-white/50 cursor-default"
+                    className="rounded-md border border-[var(--color-text-primary)]/8 bg-[var(--color-surface)] px-3 py-1.5 text-[11px] font-medium text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-primary-50)] hover:text-[var(--color-text-secondary)] cursor-default"
                   >
                     {area}
                   </span>
@@ -193,8 +193,8 @@ export function Footer() {
               </div>
             ) : null}
             {brand?.fssaiNumber?.trim() ? (
-              <div className="mt-5 flex items-center gap-1.5 text-[11px] text-white/30">
-                <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-white/25" />
+              <div className="mt-5 flex items-center gap-1.5 text-[11px] text-[var(--color-text-muted)]">
+                <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-[var(--color-primary-500)]/50" />
                 <span>FSSAI Lic. No: {brand.fssaiNumber.trim()}</span>
               </div>
             ) : null}
@@ -204,7 +204,7 @@ export function Footer() {
           {(resolvedContent.serviceLinks ?? []).length > 0 ? (
             <div>
               {resolvedContent.serviceHeading ? (
-                <div className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/30">
+                <div className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--color-text-muted)]">
                   {resolvedContent.serviceHeading}
                 </div>
               ) : null}
@@ -214,7 +214,7 @@ export function Footer() {
                     key={link.href}
                     href={localizeHref(link.href, locale)}
                     prefetch={false}
-                    className="block text-sm text-white/50 transition-colors duration-200 hover:text-white"
+                    className="block text-sm text-[var(--color-text-secondary)] transition-colors duration-200 hover:text-[var(--color-text-primary)]"
                   >
                     {link.label}
                   </Link>
@@ -227,7 +227,7 @@ export function Footer() {
           {(resolvedContent.companyLinks ?? []).length > 0 ? (
             <div>
               {resolvedContent.companyHeading ? (
-                <div className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/30">
+                <div className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--color-text-muted)]">
                   {resolvedContent.companyHeading}
                 </div>
               ) : null}
@@ -237,7 +237,7 @@ export function Footer() {
                     key={link.href}
                     href={localizeHref(link.href, locale)}
                     prefetch={false}
-                    className="block text-sm text-white/50 transition-colors duration-200 hover:text-white"
+                    className="block text-sm text-[var(--color-text-secondary)] transition-colors duration-200 hover:text-[var(--color-text-primary)]"
                   >
                     {link.label}
                   </Link>
@@ -249,38 +249,38 @@ export function Footer() {
           {/* Contact info */}
           <div>
             {resolvedContent.contactHeading ? (
-              <div className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/30">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--color-text-muted)]">
                 {resolvedContent.contactHeading}
               </div>
             ) : null}
-            <div className="mt-5 space-y-4 text-sm text-white/45">
+            <div className="mt-5 space-y-4 text-sm text-[var(--color-text-secondary)]">
               {phone ? (
                 <a
                   href={`tel:${phone.replace(/[\s-]/g, "")}`}
-                  className="flex items-start gap-3 transition-colors hover:text-white"
+                  className="flex items-start gap-3 transition-colors hover:text-[var(--color-text-primary)]"
                 >
-                  <PhoneCall className="mt-0.5 h-4 w-4 shrink-0 text-white/20" />
+                  <PhoneCall className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary-500)]/60" />
                   <span>{phone}</span>
                 </a>
               ) : null}
               {email ? (
                 <a
                   href={`mailto:${email}`}
-                  className="flex items-start gap-3 transition-colors hover:text-white"
+                  className="flex items-start gap-3 transition-colors hover:text-[var(--color-text-primary)]"
                 >
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-white/20" />
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary-500)]/60" />
                   <span>{email}</span>
                 </a>
               ) : null}
               {resolvedContent.locationText ? (
                 <div className="flex items-start gap-3">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-white/20" />
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary-500)]/60" />
                   <span>{resolvedContent.locationText}</span>
                 </div>
               ) : null}
               {resolvedContent.hoursText ? (
                 <div className="flex items-start gap-3">
-                  <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-white/20" />
+                  <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary-500)]/60" />
                   <span>{resolvedContent.hoursText}</span>
                 </div>
               ) : null}
@@ -289,7 +289,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col gap-4 pt-6 text-xs text-white/25 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-col gap-4 pt-6 text-xs text-[var(--color-text-muted)] lg:flex-row lg:items-center lg:justify-between">
           {resolvedContent.copyrightText ? <p>{resolvedContent.copyrightText}</p> : <span />}
           {(resolvedContent.policyLinks ?? []).length > 0 ? (
             <div className="flex flex-wrap gap-4">
@@ -298,7 +298,7 @@ export function Footer() {
                   key={link.href}
                   href={localizeHref(link.href, locale)}
                   prefetch={false}
-                  className="transition-colors duration-200 hover:text-white/50"
+                  className="transition-colors duration-200 hover:text-[var(--color-text-primary)]"
                 >
                   {link.label}
                 </Link>
@@ -314,7 +314,7 @@ export function Footer() {
           <motion.button
             type="button"
             onClick={scrollToTop}
-            className="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-[var(--dp-to)] text-white shadow-lg transition-colors duration-200 hover:bg-[var(--color-primary-500)] cursor-pointer"
+            className="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-lg border border-transparent bg-[var(--dp-to)] text-white shadow-lg transition-colors duration-200 hover:bg-[var(--color-primary-500)] cursor-pointer"
             aria-label="Scroll to top"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
