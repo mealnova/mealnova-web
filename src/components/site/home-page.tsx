@@ -608,59 +608,59 @@ export function HomePage({
 
   return (
     <>
-      {/* ══════════════ 1 · CINEMATIC HERO — full-viewport dark emerald ══════════════ */}
+      {/* ══════════════ 1 · HERO — light, calm, professional ══════════════ */}
       <section
         ref={heroRef}
-        className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden bg-[var(--color-surface-dark)]"
+        className="relative isolate overflow-hidden bg-[var(--color-surface)]"
       >
         <motion.div style={{ y: heroY }} className="absolute inset-0">
-          <MeshBackdrop tone="dark" />
+          <MeshBackdrop tone="light" />
         </motion.div>
 
         <motion.div
           style={{ scale: heroScale }}
-          className="container-max relative z-10 pb-20 pt-32 lg:pt-36"
+          className="container-max relative z-10 pb-16 pt-[clamp(7.5rem,13vh,9.5rem)]"
         >
           {content.hero.eyebrow ? (
             <motion.span
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="glass-panel-dark inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-white/75"
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary-500)]/15 bg-[var(--color-primary-50)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--color-primary-600)]"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--dp-to)]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-primary-500)]" />
               {content.hero.eyebrow}
             </motion.span>
           ) : null}
 
           <motion.h1
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-7 max-w-5xl font-[family-name:var(--font-display)] text-[clamp(2.9rem,7.2vw,5.6rem)] leading-[1.02] font-normal tracking-[-0.02em] text-white"
+            transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 max-w-4xl font-[family-name:var(--font-display)] text-[clamp(2.5rem,5.4vw,4.3rem)] leading-[1.06] font-normal tracking-[-0.015em] text-[var(--color-text-primary)]"
           >
             {heroTitle}
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 max-w-2xl text-[1.075rem] leading-relaxed text-white/70"
+            transition={{ duration: 0.75, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-5 max-w-2xl text-[1.05rem] leading-relaxed text-[var(--color-text-secondary)]"
           >
             {heroDescription}
           </motion.p>
 
           {heroActions.length > 0 ? (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-9 flex flex-wrap items-center gap-3"
+              transition={{ duration: 0.65, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-8 flex flex-wrap items-center gap-3"
             >
               {heroActions.map((action, index) =>
                 index === 0 ? (
-                  <Button key={action.href} variant="white" size="lg" asChild>
+                  <Button key={action.href} variant="primary" size="lg" asChild>
                     <Link href={localizeHref(action.href, locale)}>
                       {action.label}
                       <ArrowRight className="h-4 w-4" />
@@ -670,7 +670,7 @@ export function HomePage({
                   <Link
                     key={action.href}
                     href={localizeHref(action.href, locale)}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:border-white/50 hover:bg-white/5"
+                    className="inline-flex items-center gap-2 rounded-full border border-[var(--color-text-primary)]/12 bg-white px-6 py-3 text-sm font-semibold text-[var(--color-text-primary)] shadow-sm transition-colors duration-200 hover:border-[var(--color-text-primary)]/25"
                   >
                     {action.label}
                   </Link>
@@ -681,21 +681,21 @@ export function HomePage({
 
           {heroMetrics.length > 0 ? (
             <motion.div
-              initial={{ opacity: 0, y: 22 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.65, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}
               className="mt-14 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4"
             >
               {heroMetrics.map((metric) => (
                 <div
                   key={metric.label}
-                  className="glass-panel-dark rounded-2xl px-5 py-4 text-center"
+                  className="rounded-2xl border border-[var(--color-text-primary)]/8 bg-white px-5 py-4 text-center shadow-[0_1px_2px_rgba(16,24,25,0.04),0_10px_28px_-18px_rgba(16,24,25,0.12)]"
                 >
                   <StatCounter
                     value={metric.value}
-                    className="font-[family-name:var(--font-display)] text-[1.9rem] leading-none text-white"
+                    className="font-[family-name:var(--font-display)] text-[1.8rem] leading-none text-[var(--color-primary-600)]"
                   />
-                  <div className="mt-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-white/55">
+                  <div className="mt-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
                     {metric.label}
                   </div>
                 </div>
@@ -704,49 +704,49 @@ export function HomePage({
           ) : null}
         </motion.div>
 
-        {/* Logo marquee anchored to hero base */}
-        <div className="relative z-10 border-t border-white/10 bg-white/[0.03] py-5 backdrop-blur-sm">
+        {/* Trusted-by marquee — quiet, neutral */}
+        <div className="relative z-10 border-t border-[var(--color-text-primary)]/8 bg-white/70 py-5 backdrop-blur-sm">
           <div className="container-max">
             {content.services.logoEyebrow ? (
-              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
+              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
                 {content.services.logoEyebrow}
               </div>
             ) : null}
-            <div className="relative mt-3 h-10 overflow-hidden">
+            <div className="relative mt-3 h-9 overflow-hidden">
               <InfiniteSlider className="flex h-full w-full items-center" duration={32} durationOnHover={70} gap={48}>
                 {clientNames.map((client) => (
                   <div
                     key={client}
-                    className="flex shrink-0 items-center gap-3 whitespace-nowrap text-sm font-semibold tracking-wide text-white/55 transition-colors duration-200 hover:text-white/85"
+                    className="flex shrink-0 items-center gap-3 whitespace-nowrap text-sm font-semibold tracking-wide text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-text-primary)]"
                   >
                     {client}
-                    <span className="h-1 w-1 rounded-full bg-white/25" />
+                    <span className="h-1 w-1 rounded-full bg-[var(--color-text-primary)]/15" />
                   </div>
                 ))}
               </InfiniteSlider>
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[var(--color-surface-dark)] to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[var(--color-surface-dark)] to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ══════════════ 2 · INDUSTRY PATHS — cream sheet overlapping hero ══════════════ */}
-      <section className="relative z-10 -mt-6 rounded-t-[2.5rem] bg-[var(--color-surface)] pb-[clamp(4rem,7vw,6rem)] pt-[clamp(4.5rem,8vw,7rem)]">
+      {/* ══════════════ 2 · INDUSTRY PATHS — white cards, hairline borders ══════════════ */}
+      <section className="bg-white pb-[clamp(4rem,7vw,6rem)] pt-[clamp(4rem,7vw,6rem)]">
         <div className="container-max">
           <div className="grid items-end gap-6 lg:grid-cols-[1fr_minmax(0,22rem)]">
             <div>
               {content.services.header.eyebrow ? (
-                <div className="eyebrow text-[var(--color-secondary-500)]">
+                <div className="eyebrow text-[var(--color-primary-600)]">
                   {content.services.header.eyebrow}
                 </div>
               ) : null}
-              <h2 className="mt-3 font-[family-name:var(--font-display)] text-[clamp(1.9rem,3.6vw,3rem)] leading-[1.08] font-normal text-[var(--color-text-primary)]">
+              <h2 className="mt-3 font-[family-name:var(--font-display)] text-[clamp(1.8rem,3.2vw,2.6rem)] leading-[1.1] font-normal text-[var(--color-text-primary)]">
                 {content.services.header.title}
               </h2>
             </div>
             {content.services.header.description ? (
-              <p className="text-[0.98rem] leading-relaxed text-[var(--color-text-secondary)]">
+              <p className="text-[0.95rem] leading-relaxed text-[var(--color-text-secondary)]">
                 {content.services.header.description}
               </p>
             ) : null}
@@ -758,26 +758,26 @@ export function HomePage({
                 const Icon = service.icon;
                 return (
                   <Reveal key={service.id} className="h-full">
-                    <article className="group relative h-full overflow-hidden rounded-3xl glass-panel p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-22px_rgba(30,111,78,0.38)]">
-                      <span className="pointer-events-none absolute right-6 top-4 font-[family-name:var(--font-display)] text-6xl leading-none text-[var(--color-primary-500)]/10">
+                    <article className="group relative h-full overflow-hidden rounded-2xl border border-[var(--color-text-primary)]/8 bg-white p-7 shadow-[0_1px_2px_rgba(16,24,25,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-primary-500)]/25 hover:shadow-[0_16px_40px_-20px_rgba(16,24,25,0.18)]">
+                      <span className="pointer-events-none absolute right-6 top-4 font-[family-name:var(--font-display)] text-5xl leading-none text-[var(--color-text-primary)]/[0.05]">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <span className="inline-flex rounded-2xl bg-[var(--color-primary-50)] p-3.5">
-                        <Icon className="h-6 w-6 text-[var(--color-primary-600)]" />
+                      <span className="inline-flex rounded-xl bg-[var(--color-primary-50)] p-3">
+                        <Icon className="h-5 w-5 text-[var(--color-primary-600)]" />
                       </span>
-                      <h3 className="mt-6 text-lg font-bold text-[var(--color-text-primary)]">
+                      <h3 className="mt-5 text-[1.05rem] font-bold text-[var(--color-text-primary)]">
                         {service.title}
                       </h3>
-                      <p className="mt-2.5 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                      <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
                         {service.description}
                       </p>
                       {service.ctaLink?.trim() ? (
                         <Link
                           href={localizeHref(service.ctaLink, locale)}
-                          className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-[var(--color-primary-600)]"
+                          className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--color-primary-600)]"
                         >
                           {service.ctaText?.trim() || content.services.linkLabel || ""}
-                          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+                          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                         </Link>
                       ) : null}
                     </article>
@@ -786,7 +786,7 @@ export function HomePage({
               })}
             </div>
           ) : content.services.emptyState ? (
-            <div className="mt-12 rounded-3xl glass-panel p-10 text-center">
+            <div className="mt-12 rounded-2xl border border-[var(--color-text-primary)]/8 bg-white p-10 text-center">
               <h3 className="text-lg font-bold text-[var(--color-text-primary)]">
                 {content.services.emptyState.title}
               </h3>
@@ -798,28 +798,28 @@ export function HomePage({
         </div>
       </section>
 
-      {/* ══════════════ 3 · OPERATIONS STORY — editorial split ══════════════ */}
-      <section className="relative overflow-hidden bg-white py-[clamp(4.5rem,8vw,7rem)]">
+      {/* ══════════════ 3 · OPERATIONS STORY — editorial split, light ══════════════ */}
+      <section className="relative overflow-hidden bg-[var(--color-surface)] py-[clamp(4rem,7vw,6.5rem)]">
         <div className="container-max grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             {content.corporate.contentEyebrow ? (
-              <div className="eyebrow text-[var(--color-secondary-500)]">
+              <div className="eyebrow text-[var(--color-primary-600)]">
                 {content.corporate.contentEyebrow}
               </div>
             ) : null}
-            <h2 className="mt-3 font-[family-name:var(--font-display)] text-[clamp(2rem,4vw,3.1rem)] leading-[1.07] font-normal text-[var(--color-text-primary)]">
+            <h2 className="mt-3 font-[family-name:var(--font-display)] text-[clamp(1.9rem,3.6vw,2.8rem)] leading-[1.08] font-normal text-[var(--color-text-primary)]">
               {content.corporate.contentTitle}
             </h2>
-            <p className="mt-5 max-w-xl text-[1.02rem] leading-relaxed text-[var(--color-text-secondary)]">
+            <p className="mt-4 max-w-xl text-[1rem] leading-relaxed text-[var(--color-text-secondary)]">
               {content.corporate.contentDescription}
             </p>
 
-            <div className="mt-9 space-y-6">
+            <div className="mt-8 space-y-5">
               {content.corporate.features.map((feature) => (
                 <div key={feature.label}>
-                  <DrawLine className="mb-4" />
+                  <DrawLine className="mb-3.5" />
                   <div className="flex items-baseline justify-between gap-6">
-                    <div className="text-[0.95rem] font-bold text-[var(--color-text-primary)]">
+                    <div className="text-[0.92rem] font-bold text-[var(--color-text-primary)]">
                       {feature.label}
                     </div>
                     <div className="text-right text-sm text-[var(--color-text-muted)]">
@@ -830,7 +830,7 @@ export function HomePage({
               ))}
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-9 flex flex-wrap gap-3">
               {content.corporate.primaryAction.href ? (
                 <Button variant="primary" size="lg" asChild>
                   <Link href={localizeHref(content.corporate.primaryAction.href, locale)}>
@@ -842,7 +842,7 @@ export function HomePage({
               {content.corporate.secondaryAction.href ? (
                 <Link
                   href={localizeHref(content.corporate.secondaryAction.href, locale)}
-                  className="inline-flex items-center rounded-full border border-[var(--color-primary-100)] px-6 py-3 text-sm font-semibold text-[var(--color-primary-600)] transition-colors duration-200 hover:border-[var(--color-primary-500)]/40 hover:bg-[var(--color-primary-50)]"
+                  className="inline-flex items-center rounded-full border border-[var(--color-text-primary)]/12 bg-white px-6 py-3 text-sm font-semibold text-[var(--color-text-primary)] shadow-sm transition-colors duration-200 hover:border-[var(--color-text-primary)]/25"
                 >
                   {content.corporate.secondaryAction.label}
                 </Link>
@@ -851,24 +851,24 @@ export function HomePage({
           </div>
 
           <TiltCard className="relative">
-            <div className="glass-panel-dark relative overflow-hidden rounded-[2rem] p-9">
-              <AnimatedRing className="absolute -right-20 -top-20 h-64 w-64 opacity-50" />
+            <div className="relative overflow-hidden rounded-[1.75rem] border border-[var(--color-primary-500)]/15 bg-[var(--color-primary-50)] p-9">
+              <AnimatedRing className="absolute -right-20 -top-20 h-64 w-64 opacity-40" />
               <div className="relative">
                 {content.corporate.visualEyebrow ? (
-                  <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">
+                  <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--color-primary-600)]/70">
                     {content.corporate.visualEyebrow}
                   </div>
                 ) : null}
-                <h3 className="mt-3 font-[family-name:var(--font-display)] text-[1.65rem] leading-snug font-normal text-white">
+                <h3 className="mt-3 font-[family-name:var(--font-display)] text-[1.55rem] leading-snug font-normal text-[var(--color-text-primary)]">
                   {content.corporate.visualTitle}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/65">
+                <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">
                   {content.corporate.visualDescription}
                 </p>
-                <ul className="mt-7 space-y-3.5">
+                <ul className="mt-6 space-y-3">
                   {content.corporate.visualPoints.map((point) => (
-                    <li key={point} className="flex items-start gap-3 text-sm text-white/80">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--dp-to)]" />
+                    <li key={point} className="flex items-start gap-3 text-sm text-[var(--color-text-secondary)]">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-primary-500)]" />
                       {point}
                     </li>
                   ))}
@@ -879,68 +879,68 @@ export function HomePage({
         </div>
       </section>
 
-      {/* ══════════════ 4 · HOW IT WORKS — asymmetric bento + live stats ══════════════ */}
-      <section className="bg-[var(--color-surface)] py-[clamp(4.5rem,8vw,7rem)]">
+      {/* ══════════════ 4 · HOW IT WORKS — bento, one emerald accent tile ══════════════ */}
+      <section className="bg-white py-[clamp(4rem,7vw,6.5rem)]">
         <div className="container-max">
           <div className="mx-auto max-w-2xl text-center">
             {content.howItWorks.header.eyebrow ? (
-              <div className="eyebrow text-[var(--color-secondary-500)]">
+              <div className="eyebrow text-[var(--color-primary-600)]">
                 {content.howItWorks.header.eyebrow}
               </div>
             ) : null}
-            <h2 className="mt-3 font-[family-name:var(--font-display)] text-[clamp(1.9rem,3.6vw,3rem)] leading-[1.08] font-normal text-[var(--color-text-primary)]">
+            <h2 className="mt-3 font-[family-name:var(--font-display)] text-[clamp(1.8rem,3.2vw,2.6rem)] leading-[1.1] font-normal text-[var(--color-text-primary)]">
               {content.howItWorks.header.title}
             </h2>
             {content.howItWorks.header.description ? (
-              <p className="mt-4 text-[0.98rem] leading-relaxed text-[var(--color-text-secondary)]">
+              <p className="mt-4 text-[0.95rem] leading-relaxed text-[var(--color-text-secondary)]">
                 {content.howItWorks.header.description}
               </p>
             ) : null}
           </div>
 
-          <div className="mt-14 grid gap-5 lg:grid-cols-12">
+          <div className="mt-12 grid gap-5 lg:grid-cols-12">
             {howItWorks.map((step, index) => {
               const spans = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-span-7"];
-              const dark = index === 0;
+              const accent = index === 0;
               return (
                 <Reveal key={step.title} className={spans[index] ?? "lg:col-span-6"}>
                   <div
                     className={
-                      dark
-                        ? "relative h-full overflow-hidden rounded-3xl p-9 text-white"
-                        : "relative h-full overflow-hidden rounded-3xl glass-panel p-9"
+                      accent
+                        ? "relative h-full overflow-hidden rounded-2xl p-8 text-white"
+                        : "relative h-full overflow-hidden rounded-2xl border border-[var(--color-text-primary)]/8 bg-[var(--color-surface)] p-8"
                     }
                     style={
-                      dark
+                      accent
                         ? { background: "linear-gradient(145deg, var(--dp-from), var(--dp-to))" }
                         : undefined
                     }
                   >
-                    {dark ? <div className="grain-overlay grain-overlay-strong" /> : null}
+                    {accent ? <div className="grain-overlay" /> : null}
                     <div className="relative">
                       <span
                         className={
-                          dark
-                            ? "font-[family-name:var(--font-display)] text-7xl leading-none text-white/15"
-                            : "font-[family-name:var(--font-display)] text-7xl leading-none text-[var(--color-primary-500)]/10"
+                          accent
+                            ? "font-[family-name:var(--font-display)] text-6xl leading-none text-white/20"
+                            : "font-[family-name:var(--font-display)] text-6xl leading-none text-[var(--color-text-primary)]/[0.06]"
                         }
                       >
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <h3
                         className={
-                          dark
-                            ? "mt-5 text-lg font-bold text-white"
-                            : "mt-5 text-lg font-bold text-[var(--color-text-primary)]"
+                          accent
+                            ? "mt-4 text-[1.05rem] font-bold text-white"
+                            : "mt-4 text-[1.05rem] font-bold text-[var(--color-text-primary)]"
                         }
                       >
                         {step.title}
                       </h3>
                       <p
                         className={
-                          dark
-                            ? "mt-2.5 max-w-md text-sm leading-relaxed text-white/70"
-                            : "mt-2.5 max-w-md text-sm leading-relaxed text-[var(--color-text-secondary)]"
+                          accent
+                            ? "mt-2 max-w-md text-sm leading-relaxed text-white/75"
+                            : "mt-2 max-w-md text-sm leading-relaxed text-[var(--color-text-secondary)]"
                         }
                       >
                         {step.description}
@@ -953,13 +953,13 @@ export function HomePage({
           </div>
 
           {content.stats.length > 0 ? (
-            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {content.stats.map((stat) => (
                 <Reveal key={stat.label} className="h-full">
-                  <div className="h-full rounded-2xl glass-panel px-6 py-7 text-center">
+                  <div className="h-full rounded-2xl border border-[var(--color-text-primary)]/8 bg-white px-6 py-6 text-center shadow-[0_1px_2px_rgba(16,24,25,0.03)]">
                     <StatCounter
                       value={`${stat.target}${stat.suffix ?? ""}`}
-                      className="font-[family-name:var(--font-display)] text-[2.4rem] leading-none text-[var(--color-primary-600)]"
+                      className="font-[family-name:var(--font-display)] text-[2.1rem] leading-none text-[var(--color-primary-600)]"
                     />
                     <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
                       {stat.label}
@@ -975,9 +975,9 @@ export function HomePage({
         </div>
       </section>
 
-      {/* ══════════════ 5 · ORDERING GATE — floating dark slab ══════════════ */}
-      <section className="bg-[var(--color-surface)] px-4 pb-[clamp(3rem,5vw,4.5rem)] lg:px-8">
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-[var(--color-surface-dark)] px-6 py-[clamp(4rem,7vw,6.5rem)] text-center">
+      {/* ══════════════ 5 · ORDERING GATE — the single dark band (approved) ══════════════ */}
+      <section className="bg-white px-4 pb-[clamp(3rem,5vw,4.5rem)] lg:px-8">
+        <div className="relative overflow-hidden rounded-[2rem] bg-[var(--color-surface-dark)] px-6 py-[clamp(3.5rem,6vw,5.5rem)] text-center">
           <MeshBackdrop tone="dark" />
           <div className="relative z-10">
             {content.todaysMenu.eyebrow ? (
@@ -985,13 +985,13 @@ export function HomePage({
                 {content.todaysMenu.eyebrow}
               </div>
             ) : null}
-            <h2 className="mx-auto mt-4 max-w-3xl font-[family-name:var(--font-display)] text-[clamp(2.1rem,4.5vw,3.4rem)] leading-[1.07] font-normal text-white">
+            <h2 className="mx-auto mt-4 max-w-3xl font-[family-name:var(--font-display)] text-[clamp(1.9rem,3.8vw,2.9rem)] leading-[1.08] font-normal text-white">
               {content.todaysMenu.title}
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-[0.98rem] leading-relaxed text-white/65">
+            <p className="mx-auto mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-white/65">
               {content.todaysMenu.description}
             </p>
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Button variant="white" size="lg" asChild>
                 <Link href={localizeHref(orderingPrimaryAction.href, locale)}>
                   {orderingPrimaryAction.label}
@@ -1009,20 +1009,20 @@ export function HomePage({
         </div>
       </section>
 
-      {/* ══════════════ 6 · PROOF WALL — testimonials ══════════════ */}
-      <section className="bg-white py-[clamp(4.5rem,8vw,7rem)]">
+      {/* ══════════════ 6 · PROOF WALL — white cards ══════════════ */}
+      <section className="bg-white py-[clamp(4rem,7vw,6.5rem)]">
         <div className="container-max">
           <div className="mx-auto max-w-2xl text-center">
             {content.testimonials.header.eyebrow ? (
-              <div className="eyebrow text-[var(--color-secondary-500)]">
+              <div className="eyebrow text-[var(--color-primary-600)]">
                 {content.testimonials.header.eyebrow}
               </div>
             ) : null}
-            <h2 className="mt-3 font-[family-name:var(--font-display)] text-[clamp(1.9rem,3.6vw,3rem)] leading-[1.08] font-normal text-[var(--color-text-primary)]">
+            <h2 className="mt-3 font-[family-name:var(--font-display)] text-[clamp(1.8rem,3.2vw,2.6rem)] leading-[1.1] font-normal text-[var(--color-text-primary)]">
               {content.testimonials.header.title}
             </h2>
             {content.testimonials.header.description ? (
-              <p className="mt-4 text-[0.98rem] leading-relaxed text-[var(--color-text-secondary)]">
+              <p className="mt-4 text-[0.95rem] leading-relaxed text-[var(--color-text-secondary)]">
                 {content.testimonials.header.description}
               </p>
             ) : null}
@@ -1031,24 +1031,23 @@ export function HomePage({
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             {testimonials.map((testimonial) => (
               <Reveal key={testimonial.id} className="h-full">
-                <figure className="relative h-full rounded-3xl glass-panel p-8">
-                  <Quote className="h-7 w-7 text-[var(--color-secondary-500)]/35" />
-                  <div className="mt-4 flex gap-1">
+                <figure className="relative h-full rounded-2xl border border-[var(--color-text-primary)]/8 bg-[var(--color-surface)] p-7">
+                  <div className="flex gap-1">
                     {Array.from({ length: 5 }).map((_, starIndex) => (
                       <Star
                         key={starIndex}
                         className={
                           starIndex < (testimonial.rating ?? 5)
                             ? "h-3.5 w-3.5 fill-[var(--color-secondary-500)] text-[var(--color-secondary-500)]"
-                            : "h-3.5 w-3.5 text-[var(--color-primary-100)]"
+                            : "h-3.5 w-3.5 text-[var(--color-text-primary)]/15"
                         }
                       />
                     ))}
                   </div>
-                  <blockquote className="mt-4 text-[0.95rem] leading-relaxed text-[var(--color-text-secondary)]">
+                  <blockquote className="mt-4 text-[0.92rem] leading-relaxed text-[var(--color-text-secondary)]">
                     &ldquo;{testimonial.text}&rdquo;
                   </blockquote>
-                  <figcaption className="mt-6">
+                  <figcaption className="mt-6 border-t border-[var(--color-text-primary)]/8 pt-4">
                     <div className="text-sm font-bold text-[var(--color-text-primary)]">
                       {testimonial.name}
                     </div>
@@ -1063,27 +1062,25 @@ export function HomePage({
         </div>
       </section>
 
-      {/* ══════════════ 7 · CLIMAX CTA ══════════════ */}
-      <section className="relative overflow-hidden bg-[var(--color-surface-dark)] py-[clamp(5rem,10vw,8.5rem)]">
-        <MeshBackdrop tone="dark" />
+      {/* ══════════════ 7 · CLOSING CTA — light, calm ══════════════ */}
+      <section className="relative overflow-hidden bg-[var(--color-surface)] py-[clamp(4.5rem,8vw,7rem)]">
+        <MeshBackdrop tone="light" />
         <div className="container-max relative z-10 text-center">
           {content.cta.eyebrow ? (
-            <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/50">
-              {content.cta.eyebrow}
-            </div>
+            <div className="eyebrow text-[var(--color-primary-600)]">{content.cta.eyebrow}</div>
           ) : null}
-          <h2 className="mx-auto mt-5 max-w-4xl font-[family-name:var(--font-display)] text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.04] font-normal tracking-[-0.015em] text-white">
+          <h2 className="mx-auto mt-4 max-w-3xl font-[family-name:var(--font-display)] text-[clamp(2.1rem,4.6vw,3.4rem)] leading-[1.06] font-normal tracking-[-0.01em] text-[var(--color-text-primary)]">
             {content.cta.title}
           </h2>
           {content.cta.description ? (
-            <p className="mx-auto mt-5 max-w-2xl text-[1.02rem] leading-relaxed text-white/65">
+            <p className="mx-auto mt-4 max-w-2xl text-[1rem] leading-relaxed text-[var(--color-text-secondary)]">
               {content.cta.description}
             </p>
           ) : null}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             {ctaActions.map((action, index) =>
               index === 0 ? (
-                <Button key={action.href} variant="white" size="lg" asChild>
+                <Button key={action.href} variant="primary" size="lg" asChild>
                   <Link href={localizeHref(action.href, locale)}>
                     {action.label}
                     <ArrowRight className="h-4 w-4" />
@@ -1093,7 +1090,7 @@ export function HomePage({
                 <Link
                   key={action.href}
                   href={localizeHref(action.href, locale)}
-                  className="inline-flex items-center rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:border-white/50 hover:bg-white/5"
+                  className="inline-flex items-center rounded-full border border-[var(--color-text-primary)]/12 bg-white px-6 py-3 text-sm font-semibold text-[var(--color-text-primary)] shadow-sm transition-colors duration-200 hover:border-[var(--color-text-primary)]/25"
                 >
                   {action.label}
                 </Link>
@@ -1101,14 +1098,14 @@ export function HomePage({
             )}
           </div>
           {locale === "en" ? (
-            <div className="mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-              <Link href={localizeHref("/corporate", locale)} className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40 transition-colors duration-200 hover:text-white/75">
+            <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+              <Link href={localizeHref("/corporate", locale)} className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-text-primary)]">
                 Corporate catering in Pune
               </Link>
-              <Link href={localizeHref("/events", locale)} className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40 transition-colors duration-200 hover:text-white/75">
+              <Link href={localizeHref("/events", locale)} className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-text-primary)]">
                 Event catering services in Pune
               </Link>
-              <Link href={localizeHref("/menu", locale)} className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40 transition-colors duration-200 hover:text-white/75">
+              <Link href={localizeHref("/menu", locale)} className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-text-primary)]">
                 Browse the menu
               </Link>
             </div>
