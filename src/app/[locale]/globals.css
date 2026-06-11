@@ -830,3 +830,83 @@
     padding-bottom: 1rem;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Emerald Liquid Editorial — Wave 1 foundation
+   (spec: docs/superpowers/specs/2026-06-11-emerald-liquid-editorial-redesign.md)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Morphing emerald gradient mesh — pure CSS, no images */
+.mesh-emerald {
+  background:
+    radial-gradient(42% 56% at 18% 22%, color-mix(in srgb, var(--dp-from) 26%, transparent), transparent 70%),
+    radial-gradient(38% 48% at 82% 12%, color-mix(in srgb, var(--dp-to) 20%, transparent), transparent 70%),
+    radial-gradient(50% 60% at 70% 85%, color-mix(in srgb, var(--color-primary-500) 16%, transparent), transparent 72%),
+    radial-gradient(30% 40% at 8% 80%, color-mix(in srgb, var(--color-secondary-500) 10%, transparent), transparent 70%);
+}
+.mesh-emerald-dark {
+  background:
+    radial-gradient(46% 60% at 16% 18%, color-mix(in srgb, var(--dp-to) 38%, transparent), transparent 70%),
+    radial-gradient(40% 52% at 84% 22%, color-mix(in srgb, var(--color-primary-500) 30%, transparent), transparent 72%),
+    radial-gradient(56% 64% at 60% 90%, color-mix(in srgb, var(--dp-from) 42%, transparent), transparent 74%),
+    var(--color-surface-dark);
+}
+.mesh-drift {
+  animation: meshDrift 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes meshDrift {
+  from { transform: translate3d(-1.5%, -1%, 0) scale(1.02); }
+  to   { transform: translate3d(1.5%, 1.5%, 0) scale(1.06); }
+}
+
+/* Film grain — SVG noise, adds warmth/texture over flat fills */
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+.grain-overlay-strong { opacity: 0.09; }
+
+/* Liquid glass panels (AA-safe opacities) */
+.glass-panel {
+  background: rgba(255, 253, 248, 0.85);
+  -webkit-backdrop-filter: blur(20px) saturate(1.15);
+  backdrop-filter: blur(20px) saturate(1.15);
+  border: 1px solid color-mix(in srgb, var(--color-primary-600) 12%, transparent);
+  box-shadow: 0 18px 50px -24px color-mix(in srgb, var(--color-primary-600) 35%, transparent);
+}
+.glass-panel-dark {
+  background: rgba(13, 36, 26, 0.55);
+  -webkit-backdrop-filter: blur(20px) saturate(1.1);
+  backdrop-filter: blur(20px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 50px -24px rgba(0, 0, 0, 0.45);
+}
+
+/* Editorial display scale (Instrument Serif stays weight 400) */
+.display-hero {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.7rem, 5.6vw, 4.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+}
+
+/* Soft hover lift used by bento/glass cards — no layout shift */
+.lift-glow {
+  transition: box-shadow 0.3s ease-out, transform 0.3s ease-out, border-color 0.3s ease-out;
+}
+.lift-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 70px -28px color-mix(in srgb, var(--color-primary-600) 55%, transparent);
+  border-color: color-mix(in srgb, var(--color-primary-500) 35%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mesh-drift { animation: none; }
+  .lift-glow, .lift-glow:hover { transform: none; transition: none; }
+}

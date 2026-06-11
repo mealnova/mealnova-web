@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { AnimatedCounter } from "@/components/shared/animated-counter";
+import { MeshBackdrop } from "@/components/ui/mesh-backdrop";
 
 export interface StatsSectionItem {
   target: number;
@@ -18,10 +19,11 @@ export function StatsSection({ stats }: { stats: StatsSectionItem[] }) {
   return (
     <section
       ref={ref}
-      className="relative py-16 lg:py-24 overflow-hidden bg-[#0f172a]"
+      className="relative py-16 lg:py-24 overflow-hidden bg-[var(--color-surface-dark)]"
     >
+      <MeshBackdrop tone="dark" />
       {/* Top accent line */}
-      <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#ca8a04]/30 to-transparent" />
+      <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--color-secondary-500)]/30 to-transparent" />
       {/* Bottom border */}
       <div className="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
@@ -51,9 +53,9 @@ export function StatsSection({ stats }: { stats: StatsSectionItem[] }) {
                     isInView
                       ? {
                           textShadow: [
-                            "0 0 0px rgba(202,138,4,0)",
-                            "0 0 20px rgba(202,138,4,0.2)",
-                            "0 0 8px rgba(202,138,4,0.1)",
+                            "0 0 0px rgba(173,111,62,0)",
+                            "0 0 20px rgba(173,111,62,0.2)",
+                            "0 0 8px rgba(173,111,62,0.1)",
                           ],
                         }
                       : {}
@@ -72,7 +74,7 @@ export function StatsSection({ stats }: { stats: StatsSectionItem[] }) {
                 </motion.span>
               </div>
 
-              <div className="text-xs font-semibold text-[#ca8a04] uppercase tracking-widest mb-1.5">
+              <div className="text-xs font-semibold text-[var(--color-secondary-500)] uppercase tracking-widest mb-1.5">
                 {stat.label}
               </div>
 

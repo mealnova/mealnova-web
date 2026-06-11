@@ -23,7 +23,7 @@ export default async function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           background:
-            "linear-gradient(135deg, #0f172a 0%, #1e293b 45%, #f8fafc 100%)",
+            "linear-gradient(135deg, #1a3d2b 0%, #1e6f4e 45%, #f4f0e9 100%)",
           padding: "56px",
           color: "white",
         }}
@@ -44,7 +44,7 @@ export default async function OpenGraphImage() {
               justifyContent: "center",
               borderRadius: "22px",
               background: "#f59e0b",
-              color: "#0f172a",
+              color: "#101819",
               fontSize: "40px",
               fontWeight: 800,
             }}
@@ -62,7 +62,7 @@ export default async function OpenGraphImage() {
                 fontSize: "24px",
                 textTransform: "uppercase",
                 letterSpacing: "0.2em",
-                color: "#facc15",
+                color: "#ecdccd",
               }}
             >
               Mealnova
@@ -70,7 +70,7 @@ export default async function OpenGraphImage() {
             <div
               style={{
                 fontSize: "22px",
-                color: "#cbd5e1",
+                color: "#d7e5de",
               }}
             >
               Public site
@@ -99,7 +99,7 @@ export default async function OpenGraphImage() {
             style={{
               fontSize: "34px",
               lineHeight: 1.3,
-              color: "#e2e8f0",
+              color: "#eef4f1",
             }}
           >
             {tagline}
@@ -111,7 +111,7 @@ export default async function OpenGraphImage() {
             display: "flex",
             justifyContent: "space-between",
             fontSize: "24px",
-            color: "#cbd5e1",
+            color: "#d7e5de",
           }}
         >
           <div>Corporate catering, cafeteria operations, and event service</div>

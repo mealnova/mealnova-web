@@ -14,9 +14,9 @@ import type { LucideIcon } from "lucide-react";
 import { useServiceOfferings } from "@/lib/hooks/use-content";
 
 const themeMap: Record<string, { icon: LucideIcon; gradient: string }> = {
-  primary: { icon: Building2, gradient: "from-[#0f172a] to-[#1e293b]" },
-  accent: { icon: PartyPopper, gradient: "from-[#ca8a04] to-[#a16207]" },
-  secondary: { icon: UtensilsCrossed, gradient: "from-[#334155] to-[#1e293b]" },
+  primary: { icon: Building2, gradient: "from-[var(--dp-from)] to-[var(--dp-to)]" },
+  accent: { icon: PartyPopper, gradient: "from-[var(--color-secondary-500)] to-[var(--color-secondary-600)]" },
+  secondary: { icon: UtensilsCrossed, gradient: "from-[var(--color-primary-500)] to-[var(--dp-to)]" },
 };
 
 export function ServicesSection() {
@@ -37,7 +37,7 @@ export function ServicesSection() {
             initial={{ opacity: 0, y: 8 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-[#cbd5e1]/50 bg-[#f0f4f8]/50 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#0f172a] mb-5"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary-100)]/50 bg-[var(--color-primary-50)]/50 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--color-text-primary)] mb-5"
           >
             Our Services
           </motion.div>
@@ -100,10 +100,10 @@ export function ServicesSection() {
                 >
                   <Link
                     href={service.ctaLink || "#"}
-                    className="group relative block h-full overflow-hidden rounded-[var(--radius-xl)] border border-black/[0.06] bg-[var(--color-surface-card)] p-7 lg:p-8 shadow-[var(--shadow-card)] transition-all duration-350 hover:translate-y-[-6px] hover:shadow-[var(--shadow-card-glow)] hover:border-[#cbd5e1]/40 cursor-pointer"
+                    className="group relative block h-full overflow-hidden rounded-[var(--radius-xl)] border border-black/[0.06] bg-[var(--color-surface-card)] p-7 lg:p-8 shadow-[var(--shadow-card)] transition-all duration-350 hover:translate-y-[-6px] hover:shadow-[var(--shadow-card-glow)] hover:border-[var(--color-primary-100)]/40 cursor-pointer"
                   >
                     {/* Gradient top border on hover */}
-                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#0f172a] via-[#334155] to-[#ca8a04] opacity-0 transition-opacity duration-350 group-hover:opacity-100" />
+                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[var(--dp-from)] via-[var(--color-primary-500)] to-[var(--color-secondary-500)] opacity-0 transition-opacity duration-350 group-hover:opacity-100" />
 
                     <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${theme.gradient} flex items-center justify-center shadow-lg`}>
                       <Icon className="w-6 h-6 text-white transition-transform duration-300 group-hover:scale-110" />
@@ -122,7 +122,7 @@ export function ServicesSection() {
                         {service.features.map((feature, i) => (
                           <li key={i} className="flex items-start gap-2.5 text-[13px] text-text-secondary">
                             <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#d9e2ec]">
-                              <Check className="w-2.5 h-2.5 text-[#0f172a]" />
+                              <Check className="w-2.5 h-2.5 text-[var(--color-text-primary)]" />
                             </div>
                             {feature}
                           </li>
@@ -131,10 +131,10 @@ export function ServicesSection() {
                     )}
 
                     <div className="flex items-center gap-2 mt-8 pt-5 border-t border-black/[0.04]">
-                      <span className="text-sm font-bold text-[#0f172a] transition-colors duration-200 group-hover:text-[#0f172a]">
+                      <span className="text-sm font-bold text-[var(--color-text-primary)] transition-colors duration-200 group-hover:text-[var(--color-text-primary)]">
                         {service.ctaText || "Learn more"}
                       </span>
-                      <ArrowRight className="w-4 h-4 text-[#0f172a] transition-transform duration-250 group-hover:translate-x-2" />
+                      <ArrowRight className="w-4 h-4 text-[var(--color-text-primary)] transition-transform duration-250 group-hover:translate-x-2" />
                     </div>
                   </Link>
                 </motion.div>

@@ -143,7 +143,7 @@ export default function LocationsPage() {
                     <div className="space-y-3">
                       <div className="flex items-center justify-between text-sm text-text-secondary">
                         <span className="inline-flex items-center gap-2">
-                          <Clock3 className="h-4 w-4 text-[#0f172a]" />
+                          <Clock3 className="h-4 w-4 text-[var(--color-text-primary)]" />
                           {formatHours(location.openTime, location.closeTime)}
                         </span>
                         <Badge variant={location.isActive ? "success" : "outline"}>

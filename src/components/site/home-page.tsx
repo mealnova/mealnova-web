@@ -45,6 +45,8 @@ import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { Sparkles } from "@/components/ui/sparkles";
+import { MeshBackdrop } from "@/components/ui/mesh-backdrop";
+import { StatCounter } from "@/components/ui/stat-counter";
 import { InfoCard, PageCta, SectionHeader } from "@/components/site/page-primitives";
 import { StatsSection } from "@/components/sections/stats";
 import {
@@ -356,9 +358,9 @@ function AnimatedRing({ className }: { className?: string }) {
       />
       <defs>
         <linearGradient id="goldGrad" x1="0" y1="0" x2="200" y2="200">
-          <stop offset="0%" stopColor="#ca8a04" stopOpacity="0.4" />
-          <stop offset="50%" stopColor="#facc15" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="#ca8a04" stopOpacity="0.4" />
+          <stop offset="0%" stopColor="var(--color-secondary-500)" stopOpacity="0.4" />
+          <stop offset="50%" stopColor="var(--color-secondary-100)" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="var(--color-secondary-500)" stopOpacity="0.4" />
         </linearGradient>
       </defs>
     </svg>
@@ -373,7 +375,7 @@ function DrawLine({ className }: { className?: string }) {
   return (
     <div ref={ref} className={className}>
       <motion.div
-        className="h-[1px] bg-gradient-to-r from-transparent via-[#ca8a04]/40 to-transparent"
+        className="h-[1px] bg-gradient-to-r from-transparent via-[var(--color-secondary-500)]/40 to-transparent"
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
@@ -609,15 +611,15 @@ export function HomePage({
         ref={heroRef}
         className="relative flex min-h-[80vh] items-center overflow-hidden lg:min-h-[90vh]"
       >
-        {/* Animated gradient mesh background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#f8fafc] via-[#f1f5f9] to-[#e2e8f0]" />
+        {/* Morphing emerald gradient mesh + film grain */}
+        <MeshBackdrop tone="light" />
 
         {/* Animated grid lines */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(15,23,42,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.03) 1px, transparent 1px)",
+              "linear-gradient(rgba(16,40,30,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(16,40,30,0.03) 1px, transparent 1px)",
             backgroundSize: "80px 80px",
           }}
           animate={{ backgroundPosition: ["0px 0px", "80px 80px"] }}
@@ -634,7 +636,7 @@ export function HomePage({
           className="absolute top-[20%] right-[5%] w-[500px] h-[500px] rounded-full pointer-events-none hidden lg:block"
           style={{
             background:
-              "radial-gradient(circle, rgba(202,138,4,0.07), transparent 60%)",
+              "radial-gradient(circle, rgba(173,111,62,0.07), transparent 60%)",
             filter: "blur(80px)",
           }}
           animate={{
@@ -650,7 +652,7 @@ export function HomePage({
           className="absolute bottom-[10%] left-[5%] w-[400px] h-[400px] rounded-full pointer-events-none hidden lg:block"
           style={{
             background:
-              "radial-gradient(circle, rgba(15,23,42,0.05), transparent 60%)",
+              "radial-gradient(circle, rgba(16,40,30,0.05), transparent 60%)",
             filter: "blur(80px)",
           }}
           animate={{ y: [0, 20, 0], x: [0, -15, 0] }}
@@ -678,29 +680,26 @@ export function HomePage({
                   type: "spring",
                   stiffness: 200,
                 }}
-                className="inline-flex items-center gap-2.5 rounded-full border border-[#ca8a04]/20 bg-white/80 backdrop-blur-sm px-4 py-2 shadow-sm"
+                className="inline-flex items-center gap-2.5 rounded-full border border-[var(--color-secondary-500)]/20 bg-white/80 backdrop-blur-sm px-4 py-2 shadow-sm"
               >
                 <motion.span
-                  className="h-2 w-2 rounded-full bg-[#ca8a04]"
+                  className="h-2 w-2 rounded-full bg-[var(--color-secondary-500)]"
                   animate={{ scale: [1, 1.3, 1], opacity: [1, 0.6, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
-                <span className="text-xs font-semibold text-[#854d0e] tracking-wide uppercase">
+                <span className="text-xs font-semibold text-[var(--color-secondary-600)] tracking-wide uppercase">
                   {content.hero.eyebrow}
                 </span>
               </motion.div>
 
               {/* Hero title — word-by-word reveal */}
-              <h1
-                className="mt-7 text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] tracking-[-0.03em] text-[var(--color-text-primary)]"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
+              <h1 className="display-hero mt-7 text-[var(--color-text-primary)]">
                 <AnimatedHeroText text={String(heroTitle)} />
               </h1>
 
               {/* Description with fade */}
               <motion.p
-                className="mt-7 max-w-lg text-lg leading-[1.75] text-[#475569]"
+                className="mt-7 max-w-lg text-lg leading-[1.75] text-[var(--color-text-secondary)]"
                 initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.7 }}
@@ -740,7 +739,7 @@ export function HomePage({
               {/* Inline metrics — horizontal strip */}
               {(content.hero.metrics ?? []).length > 0 && (
                 <motion.div
-                  className="mt-12 flex flex-wrap gap-8 border-t border-[#e2e8f0] pt-8"
+                  className="mt-12 flex flex-wrap gap-8 border-t border-[var(--color-primary-100)] pt-8"
                   initial={false}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.2, duration: 0.6 }}
@@ -751,11 +750,12 @@ export function HomePage({
                       initial={false}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 1.3 + i * 0.1 }}
+                      className="glass-panel rounded-2xl px-5 py-4"
                     >
-                      <div className="text-3xl font-bold tracking-tight text-[#0f172a]">
-                        {metric.value}
+                      <div className="text-3xl font-bold tracking-tight text-[var(--color-primary-600)]">
+                        <StatCounter value={metric.value} />
                       </div>
-                      <div className="mt-1 text-xs font-medium uppercase tracking-wider text-[#94a3b8]">
+                      <div className="mt-1 text-xs font-medium uppercase tracking-wider text-[var(--color-text-muted,#6b7a80)]">
                         {metric.label}
                       </div>
                     </motion.div>
@@ -777,7 +777,7 @@ export function HomePage({
                 className="relative"
                 style={{ perspective: 1000 }}
               >
-                <TiltCard className="rounded-2xl border border-[#1e293b]/10 bg-[#0f172a] p-7 shadow-[0_30px_60px_-15px_rgba(15,23,42,0.3)]">
+                <TiltCard className="rounded-2xl border border-[var(--color-primary-600)]/10 bg-[var(--color-surface-dark)] p-7 shadow-[0_30px_60px_-15px_rgba(16,40,30,0.3)]">
                   {/* Decorative corner accents */}
                   <div className="absolute top-0 right-0 w-24 h-24 pointer-events-none">
                     <svg
@@ -787,7 +787,7 @@ export function HomePage({
                       <motion.path
                         d="M100,0 L100,100 L0,100"
                         fill="none"
-                        stroke="#ca8a04"
+                        stroke="var(--color-secondary-500)"
                         strokeWidth="1"
                         initial={{ pathLength: 0 }}
                         animate={{ pathLength: 1 }}
@@ -800,7 +800,7 @@ export function HomePage({
                     </svg>
                   </div>
 
-                  <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#ca8a04]">
+                  <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-secondary-500)]">
                     <Award className="h-3.5 w-3.5" />
                     {content.hero.aside.eyebrow}
                   </div>
@@ -823,7 +823,7 @@ export function HomePage({
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 1 + i * 0.1 }}
                       >
-                        <Star className="h-3.5 w-3.5 shrink-0 text-[#ca8a04]" />
+                        <Star className="h-3.5 w-3.5 shrink-0 text-[var(--color-secondary-500)]" />
                         {item}
                       </motion.div>
                     ))}
@@ -835,19 +835,19 @@ export function HomePage({
                   {(content.hero.aside.panels ?? []).map((panel, i) => (
                     <motion.div
                       key={panel.label}
-                      className="rounded-xl border border-[#e2e8f0] bg-white p-4 shadow-sm"
+                      className="rounded-xl border border-[var(--color-primary-100)] bg-white p-4 shadow-sm"
                       initial={false}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 1.2 + i * 0.15 }}
                       whileHover={{
                         y: -3,
-                        boxShadow: "0 12px 24px -6px rgba(15,23,42,0.1)",
+                        boxShadow: "0 12px 24px -6px rgba(16,40,30,0.1)",
                       }}
                     >
-                      <div className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#ca8a04]">
+                      <div className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-secondary-500)]">
                         {panel.label}
                       </div>
-                      <p className="mt-2 text-sm leading-relaxed text-[#64748b]">
+                      <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
                         {panel.description}
                       </p>
                     </motion.div>
@@ -866,7 +866,7 @@ export function HomePage({
           transition={{ delay: 2 }}
         >
           <motion.div
-            className="w-[1px] h-8 bg-gradient-to-b from-[#ca8a04]/50 to-transparent"
+            className="w-[1px] h-8 bg-gradient-to-b from-[var(--color-secondary-500)]/50 to-transparent"
             animate={{ scaleY: [0, 1, 0] }}
             transition={{
               duration: 1.5,
@@ -884,7 +884,7 @@ export function HomePage({
       {clientNames.length > 0 && (
         <section
           id="trusted-organisations"
-          className="relative scroll-mt-20 overflow-hidden border-y border-[#e2e8f0] bg-white py-8"
+          className="relative scroll-mt-20 overflow-hidden border-y border-[var(--color-primary-100)] bg-white py-8"
         >
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <div className="absolute inset-x-0 -bottom-24 h-72 [mask-image:radial-gradient(60%_55%,white,transparent)]">
@@ -896,7 +896,7 @@ export function HomePage({
                 opacity={0.22}
                 opacitySpeed={1.8}
                 size={1.1}
-                color="#ca8a04"
+                color="var(--color-secondary-500)"
                 className="absolute inset-x-0 bottom-0 h-full w-full [mask-image:radial-gradient(50%_50%,white,transparent_82%)]"
               />
             </div>
@@ -916,7 +916,7 @@ export function HomePage({
                 {clientNames.map((client) => (
                   <div
                     key={client}
-                    className="flex h-12 min-w-[10.5rem] shrink-0 items-center justify-center rounded-lg border border-[#e2e8f0] bg-white/82 px-6 text-sm font-semibold whitespace-nowrap text-[var(--color-text-secondary)] shadow-sm backdrop-blur-md transition-colors duration-200 hover:border-[var(--color-secondary-500)]/25 hover:text-[var(--color-text-primary)]"
+                    className="flex h-12 min-w-[10.5rem] shrink-0 items-center justify-center rounded-lg border border-[var(--color-primary-100)] bg-white/82 px-6 text-sm font-semibold whitespace-nowrap text-[var(--color-text-secondary)] shadow-sm backdrop-blur-md transition-colors duration-200 hover:border-[var(--color-secondary-500)]/25 hover:text-[var(--color-text-primary)]"
                   >
                     {client}
                   </div>
@@ -1027,10 +1027,10 @@ export function HomePage({
                   }}
                   style={{ transformPerspective: 800 }}
                 >
-                  <TiltCard className="group relative h-full rounded-2xl border border-[#e2e8f0] bg-white p-8 transition-shadow duration-400 hover:shadow-[0_25px_50px_-12px_rgba(15,23,42,0.12)]">
+                  <TiltCard className="group relative h-full rounded-2xl border border-[var(--color-primary-100)] bg-white p-8 transition-shadow duration-400 hover:shadow-[0_25px_50px_-12px_rgba(16,40,30,0.12)]">
                     {/* Animated gold top line */}
                     <motion.div
-                      className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl bg-gradient-to-r from-[#ca8a04] via-[#facc15] to-[#ca8a04]"
+                      className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl bg-gradient-to-r from-[var(--color-secondary-500)] via-[var(--color-secondary-100)] to-[var(--color-secondary-500)]"
                       initial={{ scaleX: 0 }}
                       whileHover={{ scaleX: 1 }}
                       transition={{ duration: 0.3 }}
@@ -1039,18 +1039,18 @@ export function HomePage({
 
                     {/* Icon with glow effect on hover */}
                     <div className="relative">
-                      <span className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[#f8fafc] border border-[#e2e8f0] text-[#334155] transition-all duration-300 group-hover:bg-[#0f172a] group-hover:text-white group-hover:border-[#0f172a] group-hover:shadow-[0_0_30px_rgba(15,23,42,0.2)]">
+                      <span className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[var(--color-surface)] border border-[var(--color-primary-100)] text-[var(--color-text-secondary)] transition-all duration-300 group-hover:bg-[var(--color-surface-dark)] group-hover:text-white group-hover:border-[var(--color-primary-600)] group-hover:shadow-[0_0_30px_rgba(16,40,30,0.2)]">
                         <service.icon className="h-6 w-6" />
                       </span>
                     </div>
 
-                    <div className="mt-6 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#ca8a04]">
+                    <div className="mt-6 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-secondary-500)]">
                       {service.ctaText ?? content.services.cardEyebrow ?? ""}
                     </div>
-                    <h3 className="mt-2 text-lg font-semibold text-[#0f172a] tracking-[-0.01em]">
+                    <h3 className="mt-2 text-lg font-semibold text-[var(--color-text-primary)] tracking-[-0.01em]">
                       {service.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-[1.7] text-[#64748b]">
+                    <p className="mt-3 text-sm leading-[1.7] text-[var(--color-text-secondary)]">
                       {service.description}
                     </p>
 
@@ -1058,13 +1058,13 @@ export function HomePage({
                       {(service.features ?? []).slice(0, 3).map((feature, fi) => (
                         <motion.div
                           key={feature}
-                          className="flex items-start gap-3 text-sm text-[#64748b]"
+                          className="flex items-start gap-3 text-sm text-[var(--color-text-secondary)]"
                           initial={{ opacity: 0, x: -10 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: 0.4 + fi * 0.08 }}
                         >
-                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#ca8a04]" />
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-secondary-500)]" />
                           <span>{feature}</span>
                         </motion.div>
                       ))}
@@ -1072,7 +1072,7 @@ export function HomePage({
 
                     <Link
                       href={service.ctaLink ?? "/corporate"}
-                      className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#0f172a] transition-all duration-250 group-hover:text-[#ca8a04] group-hover:gap-3 cursor-pointer"
+                      className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-text-primary)] transition-all duration-250 group-hover:text-[var(--color-secondary-500)] group-hover:gap-3 cursor-pointer"
                     >
                       {service.ctaText ?? content.services.linkLabel ?? ""}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -1093,7 +1093,7 @@ export function HomePage({
       </section>
 
       {locale === "en" ? (
-        <section className="border-y border-[#e2e8f0] bg-[#fcfbf7] py-[clamp(4.5rem,8vw,6rem)]">
+        <section className="border-y border-[var(--color-primary-100)] bg-[#fcfbf7] py-[clamp(4.5rem,8vw,6rem)]">
           <div className="container-max">
             <Reveal>
               <SectionHeader
@@ -1161,7 +1161,7 @@ export function HomePage({
       {/* ══════════════════════════════════════════════
           HOW IT WORKS — Timeline with animated connectors
           ══════════════════════════════════════════════ */}
-      <section className="py-[clamp(5rem,9vw,8rem)] bg-[#f8fafc] relative overflow-hidden">
+      <section className="py-[clamp(5rem,9vw,8rem)] bg-[var(--color-surface)] relative overflow-hidden">
         <div className="container-max">
           <Reveal>
             <SectionHeader
@@ -1176,7 +1176,7 @@ export function HomePage({
             {/* Connecting line — desktop only */}
             <div className="hidden lg:block absolute top-[40px] left-[calc(12.5%+20px)] right-[calc(12.5%+20px)] h-[1px]">
               <motion.div
-                className="h-full bg-gradient-to-r from-[#ca8a04]/30 via-[#ca8a04]/60 to-[#ca8a04]/30"
+                className="h-full bg-gradient-to-r from-[var(--color-secondary-500)]/30 via-[var(--color-secondary-500)]/60 to-[var(--color-secondary-500)]/30"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
@@ -1214,21 +1214,21 @@ export function HomePage({
                     {/* Step circle */}
                     <div className="relative mx-auto mb-6">
                       <motion.div
-                        className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-white border-2 border-[#e2e8f0] shadow-md transition-all duration-300 group-hover:border-[#ca8a04] group-hover:shadow-[0_0_0_4px_rgba(202,138,4,0.1)]"
+                        className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-white border-2 border-[var(--color-primary-100)] shadow-md transition-all duration-300 group-hover:border-[var(--color-secondary-500)] group-hover:shadow-[0_0_0_4px_rgba(173,111,62,0.1)]"
                         whileHover={{ rotate: 5, scale: 1.05 }}
                       >
-                        <div className="text-lg font-bold text-[#0f172a] group-hover:text-[#ca8a04] transition-colors">
+                        <div className="text-lg font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-secondary-500)] transition-colors">
                           {String(index + 1).padStart(2, "0")}
                         </div>
                       </motion.div>
                       {/* Pulse ring on hover */}
-                      <div className="absolute inset-0 rounded-full border border-[#ca8a04]/0 group-hover:border-[#ca8a04]/20 group-hover:scale-125 transition-all duration-500" />
+                      <div className="absolute inset-0 rounded-full border border-[var(--color-secondary-500)]/0 group-hover:border-[var(--color-secondary-500)]/20 group-hover:scale-125 transition-all duration-500" />
                     </div>
 
-                    <h3 className="text-base font-semibold text-[#0f172a]">
+                    <h3 className="text-base font-semibold text-[var(--color-text-primary)]">
                       {step.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#64748b] max-w-[240px] mx-auto">
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)] max-w-[240px] mx-auto">
                       {step.description}
                     </p>
                   </motion.div>
@@ -1247,33 +1247,34 @@ export function HomePage({
       {/* ══════════════════════════════════════════════
           ORDERING ACCESS — Dark premium section
           ══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-[#0f172a] py-[clamp(5rem,9vw,8rem)]">
+      <section className="relative overflow-hidden bg-[var(--color-surface-dark)] py-[clamp(5rem,9vw,8rem)]">
+        <MeshBackdrop tone="dark" />
         {/* Animated gradient blob */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 40% 50% at 70% 50%, rgba(202,138,4,0.06), transparent 70%)",
+              "radial-gradient(ellipse 40% 50% at 70% 50%, rgba(173,111,62,0.06), transparent 70%)",
           }}
           animate={{
             background: [
-              "radial-gradient(ellipse 40% 50% at 70% 50%, rgba(202,138,4,0.06), transparent 70%)",
-              "radial-gradient(ellipse 50% 40% at 30% 50%, rgba(202,138,4,0.08), transparent 70%)",
-              "radial-gradient(ellipse 40% 50% at 70% 50%, rgba(202,138,4,0.06), transparent 70%)",
+              "radial-gradient(ellipse 40% 50% at 70% 50%, rgba(173,111,62,0.06), transparent 70%)",
+              "radial-gradient(ellipse 50% 40% at 30% 50%, rgba(173,111,62,0.08), transparent 70%)",
+              "radial-gradient(ellipse 40% 50% at 70% 50%, rgba(173,111,62,0.06), transparent 70%)",
             ],
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#ca8a04]/30 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--color-secondary-500)]/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.04] to-transparent" />
 
         <div className="container-max relative z-10">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <Reveal className="max-w-xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#ca8a04]/20 bg-[#ca8a04]/10 px-4 py-1.5">
-                <SparklesIcon className="h-3 w-3 text-[#ca8a04]" />
-                <span className="text-xs font-semibold text-[#ca8a04] tracking-wide uppercase">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-secondary-500)]/20 bg-[var(--color-secondary-500)]/10 px-4 py-1.5">
+                <SparklesIcon className="h-3 w-3 text-[var(--color-secondary-500)]" />
+                <span className="text-xs font-semibold text-[var(--color-secondary-500)] tracking-wide uppercase">
                   {content.todaysMenu.eyebrow || "Approved client ordering"}
                 </span>
               </div>
@@ -1336,7 +1337,7 @@ export function HomePage({
                     key={highlight}
                     className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/70"
                   >
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#ca8a04]" />
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-secondary-500)]" />
                     <span>{highlight}</span>
                   </div>
                 ))}
@@ -1350,7 +1351,7 @@ export function HomePage({
           TESTIMONIALS — Cards with large quote and avatars
           ══════════════════════════════════════════════ */}
       {testimonials.length > 0 && (
-        <section className="py-[clamp(5rem,9vw,8rem)] bg-[#f8fafc] relative overflow-hidden">
+        <section className="py-[clamp(5rem,9vw,8rem)] bg-[var(--color-surface)] relative overflow-hidden">
           <div className="container-max">
             <Reveal>
               <SectionHeader
@@ -1382,14 +1383,14 @@ export function HomePage({
                   }}
                   whileHover={{
                     y: -6,
-                    boxShadow: "0 20px 40px -12px rgba(15,23,42,0.1)",
+                    boxShadow: "0 20px 40px -12px rgba(16,40,30,0.1)",
                   }}
-                  className="group relative h-full rounded-2xl border border-[#e2e8f0] bg-white p-8 transition-shadow duration-300"
+                  className="group relative h-full rounded-2xl border border-[var(--color-primary-100)] bg-white p-8 transition-shadow duration-300"
                   style={{ transformPerspective: 800 }}
                 >
                   {/* Huge decorative quote mark */}
                   <div
-                    className="absolute -top-2 -left-1 text-[120px] leading-none font-serif text-[#ca8a04]/[0.06] select-none pointer-events-none"
+                    className="absolute -top-2 -left-1 text-[120px] leading-none font-serif text-[var(--color-secondary-500)]/[0.06] select-none pointer-events-none"
                   >
                     &ldquo;
                   </div>
@@ -1409,25 +1410,25 @@ export function HomePage({
                             stiffness: 300,
                           }}
                         >
-                          <Star className="h-4 w-4 text-[#ca8a04] fill-[#ca8a04]" />
+                          <Star className="h-4 w-4 text-[var(--color-secondary-500)] fill-[var(--color-secondary-500)]" />
                         </motion.div>
                       ),
                     )}
                   </div>
 
-                  <p className="relative z-10 mt-5 text-[15px] leading-[1.75] text-[#475569] italic">
+                  <p className="relative z-10 mt-5 text-[15px] leading-[1.75] text-[var(--color-text-secondary)] italic">
                     {testimonial.text}
                   </p>
 
-                  <div className="relative z-10 mt-6 flex items-center gap-3 border-t border-[#f1f5f9] pt-5">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-[#0f172a] to-[#334155] text-sm font-bold text-white shadow-md">
+                  <div className="relative z-10 mt-6 flex items-center gap-3 border-t border-[var(--color-primary-50)] pt-5">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-[var(--dp-from)] to-[var(--dp-to)] text-sm font-bold text-white shadow-md">
                       {testimonial.name?.charAt(0) ?? ""}
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-[#0f172a]">
+                      <div className="text-sm font-semibold text-[var(--color-text-primary)]">
                         {testimonial.name}
                       </div>
-                      <div className="text-xs text-[#94a3b8]">
+                      <div className="text-xs text-[var(--color-text-muted,#6b7a80)]">
                         {testimonial.role}
                         {testimonial.company
                           ? ` · ${testimonial.company}`
@@ -1450,12 +1451,12 @@ export function HomePage({
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
             {/* Left — dark visual panel */}
             <Reveal direction="left">
-              <div className="relative overflow-hidden rounded-2xl p-8 lg:p-10 min-h-[440px]" style={{ background: "linear-gradient(155deg, #0f172a 0%, #1e293b 100%)" }}>
+              <div className="relative overflow-hidden rounded-2xl p-8 lg:p-10 min-h-[440px]" style={{ background: "linear-gradient(155deg, var(--dp-from) 0%, var(--dp-to) 100%)" }}>
                 {/* Animated scanning line */}
                 <motion.div
                   className="absolute top-0 left-0 right-0 h-[2px]"
                   style={{
-                    background: "linear-gradient(90deg, transparent 0%, #ca8a04 50%, transparent 100%)",
+                    background: "linear-gradient(90deg, transparent 0%, var(--color-secondary-500) 50%, transparent 100%)",
                   }}
                   animate={{ x: ["-100%", "200%"] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
@@ -1470,7 +1471,7 @@ export function HomePage({
                 <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
 
                 <div className="relative z-10">
-                  <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[#ca8a04]">
+                  <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-secondary-500)]">
                     <TrendingUp className="h-3.5 w-3.5" />
                     {content.corporate.visualEyebrow}
                   </div>
@@ -1494,8 +1495,8 @@ export function HomePage({
                         viewport={{ once: true }}
                         transition={{ delay: 0.3 + i * 0.1 }}
                       >
-                        <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-[#ca8a04]/15">
-                          <CheckCircle2 className="h-3 w-3 text-[#ca8a04]" />
+                        <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-[var(--color-secondary-500)]/15">
+                          <CheckCircle2 className="h-3 w-3 text-[var(--color-secondary-500)]" />
                         </div>
                         {item}
                       </motion.div>
@@ -1511,12 +1512,12 @@ export function HomePage({
                 {content.corporate.contentEyebrow}
               </div>
               <h2
-                className="mt-4 text-[clamp(1.5rem,2.5vw,2.25rem)] font-normal leading-[1.2] tracking-[-0.02em] text-[#0f172a]"
+                className="mt-4 text-[clamp(1.5rem,2.5vw,2.25rem)] font-normal leading-[1.2] tracking-[-0.02em] text-[var(--color-text-primary)]"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {content.corporate.contentTitle}
               </h2>
-              <p className="mt-4 text-[15px] leading-[1.7] text-[#64748b]">
+              <p className="mt-4 text-[15px] leading-[1.7] text-[var(--color-text-secondary)]">
                 {content.corporate.contentDescription}
               </p>
 
@@ -1531,16 +1532,16 @@ export function HomePage({
                     transition={{ delay: 0.2 + i * 0.1 }}
                   >
                     <motion.span
-                      className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#fefce8] border border-[#ca8a04]/10"
+                      className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#fefce8] border border-[var(--color-secondary-500)]/10"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                     >
-                      <CheckCircle2 className="h-4 w-4 text-[#ca8a04]" />
+                      <CheckCircle2 className="h-4 w-4 text-[var(--color-secondary-500)]" />
                     </motion.span>
                     <div>
-                      <div className="text-[15px] font-semibold text-[#0f172a]">
+                      <div className="text-[15px] font-semibold text-[var(--color-text-primary)]">
                         {feature.label}
                       </div>
-                      <div className="mt-1 text-sm leading-relaxed text-[#64748b]">
+                      <div className="mt-1 text-sm leading-relaxed text-[var(--color-text-secondary)]">
                         {feature.detail}
                       </div>
                     </div>

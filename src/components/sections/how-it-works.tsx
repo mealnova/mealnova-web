@@ -48,7 +48,7 @@ export function HowItWorksSection() {
             initial={{ opacity: 0, y: 8 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.4 }}
-            className="eyebrow text-[#0f172a] mb-4"
+            className="eyebrow text-[var(--color-text-primary)] mb-4"
           >
             HOW IT WORKS
           </motion.p>
@@ -74,7 +74,7 @@ export function HowItWorksSection() {
         <div className="hidden lg:grid lg:grid-cols-4 lg:gap-0 relative">
           {/* Horizontal connector line */}
           <div
-            className="absolute top-[20px] left-[calc(12.5%+20px)] right-[calc(12.5%+20px)] border-t-2 border-dashed border-[#cbd5e1] z-0"
+            className="absolute top-[20px] left-[calc(12.5%+20px)] right-[calc(12.5%+20px)] border-t-2 border-dashed border-[var(--color-primary-100)] z-0"
             aria-hidden="true"
           />
 
@@ -95,15 +95,15 @@ export function HowItWorksSection() {
               >
                 <div className="site-panel p-6 text-left h-full">
                   {/* Step number circle */}
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--dp-from)] to-[var(--dp-to)] flex items-center justify-center mb-4">
                     <span className="text-sm font-bold text-white leading-none">
                       {step.step}
                     </span>
                   </div>
 
                   {/* Icon */}
-                  <div className="w-11 h-11 rounded-xl bg-[#f0f4f8] border border-[#d9e2ec] flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5 text-[#0f172a]" />
+                  <div className="w-11 h-11 rounded-xl bg-[var(--color-primary-50)] border border-[#d9e2ec] flex items-center justify-center mb-4">
+                    <Icon className="w-5 h-5 text-[var(--color-text-primary)]" />
                   </div>
 
                   {/* Title */}
@@ -125,7 +125,7 @@ export function HowItWorksSection() {
         <div className="lg:hidden relative">
           {/* Vertical connector line */}
           <div
-            className="absolute top-[20px] bottom-[20px] left-[19px] border-l-2 border-dashed border-[#cbd5e1] z-0"
+            className="absolute top-[20px] bottom-[20px] left-[19px] border-l-2 border-dashed border-[var(--color-primary-100)] z-0"
             aria-hidden="true"
           />
 
@@ -146,7 +146,7 @@ export function HowItWorksSection() {
                   className="relative z-10 flex items-start gap-5"
                 >
                   {/* Step number circle */}
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--dp-from)] to-[var(--dp-to)] flex items-center justify-center shrink-0">
                     <span className="text-sm font-bold text-white leading-none">
                       {step.step}
                     </span>
@@ -155,8 +155,8 @@ export function HowItWorksSection() {
                   {/* Card */}
                   <div className="site-panel p-6 flex-1 text-left">
                     {/* Icon */}
-                    <div className="w-11 h-11 rounded-xl bg-[#f0f4f8] border border-[#d9e2ec] flex items-center justify-center mb-4">
-                      <Icon className="w-5 h-5 text-[#0f172a]" />
+                    <div className="w-11 h-11 rounded-xl bg-[var(--color-primary-50)] border border-[#d9e2ec] flex items-center justify-center mb-4">
+                      <Icon className="w-5 h-5 text-[var(--color-text-primary)]" />
                     </div>
 
                     {/* Title */}

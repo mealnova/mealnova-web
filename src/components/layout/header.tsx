@@ -161,7 +161,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMobileOpen((open) => !open)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#e2e8f0] bg-white text-[#334155] lg:hidden cursor-pointer"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--color-primary-100)] bg-white text-[var(--color-text-secondary)] lg:hidden cursor-pointer"
             aria-label="Toggle navigation"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
