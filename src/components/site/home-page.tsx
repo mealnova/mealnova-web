@@ -506,6 +506,22 @@ function serviceIcon(service: ServiceOffering): LucideIcon {
   return UtensilsCrossed;
 }
 
+/* Food photography (design assets in /public/images/food) */
+const FOOD_STRIP = [
+  { src: "/images/food/biryani.jpg", alt: "Vegetable biryani served in copper handis" },
+  { src: "/images/food/paneer-tikka.jpg", alt: "Paneer tikka masala in a kadai" },
+  { src: "/images/food/dosa.jpg", alt: "Crisp dosa with chutneys and sambar" },
+  { src: "/images/food/thali-real.jpg", alt: "Mealnova daily thali with dal, rice, sabzi and roti" },
+  { src: "/images/food/spice-table.jpg", alt: "Slow-cooked masala with naan" },
+  { src: "/images/food/chaat.jpg", alt: "Samosas with green chutney" },
+];
+
+const PATH_PHOTOS = [
+  "/images/food/thali-real.jpg",
+  "/images/food/biryani.jpg",
+  "/images/food/spice-table.jpg",
+];
+
 /* ══════════════════════════════════════════════════════════════════
    MAIN HOMEPAGE
    ══════════════════════════════════════════════════════════════════ */
@@ -731,6 +747,35 @@ export function HomePage({
         </div>
       </section>
 
+      {/* ══════════════ 1b · TASTE STRIP — framed food photography ══════════════ */}
+      <section className="overflow-hidden border-b border-[var(--color-text-primary)]/8 bg-white py-12">
+        <InfiniteSlider className="flex w-full items-center" duration={60} durationOnHover={140} gap={28}>
+          {FOOD_STRIP.map((photo, index) => (
+            <figure
+              key={photo.src}
+              className={
+                (index % 2 === 0
+                  ? "rounded-t-[110px] rounded-b-2xl "
+                  : "rounded-2xl ") +
+                (index % 3 === 0 ? "-rotate-1 " : index % 3 === 1 ? "rotate-1 " : "") +
+                "shrink-0 overflow-hidden border border-[var(--color-text-primary)]/10 bg-white p-1.5 shadow-[0_14px_34px_-18px_rgba(16,24,25,0.25)]"
+              }
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                width={420}
+                height={520}
+                className={
+                  (index % 2 === 0 ? "rounded-t-[104px] rounded-b-xl " : "rounded-xl ") +
+                  "h-[230px] w-[180px] object-cover sm:h-[270px] sm:w-[215px]"
+                }
+              />
+            </figure>
+          ))}
+        </InfiniteSlider>
+      </section>
+
       {/* ══════════════ 2 · INDUSTRY PATHS — white cards, hairline borders ══════════════ */}
       <section className="bg-white pb-[clamp(4rem,7vw,6rem)] pt-[clamp(4rem,7vw,6rem)]">
         <div className="container-max">
@@ -758,10 +803,20 @@ export function HomePage({
                 const Icon = service.icon;
                 return (
                   <Reveal key={service.id} className="h-full">
-                    <article className="group relative h-full overflow-hidden rounded-2xl border border-[var(--color-text-primary)]/8 bg-white p-7 shadow-[0_1px_2px_rgba(16,24,25,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-primary-500)]/25 hover:shadow-[0_16px_40px_-20px_rgba(16,24,25,0.18)]">
-                      <span className="pointer-events-none absolute right-6 top-4 font-[family-name:var(--font-display)] text-5xl leading-none text-[var(--color-text-primary)]/[0.05]">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
+                    <article className="group relative h-full overflow-hidden rounded-2xl border border-[var(--color-text-primary)]/8 bg-white shadow-[0_1px_2px_rgba(16,24,25,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-primary-500)]/25 hover:shadow-[0_16px_40px_-20px_rgba(16,24,25,0.18)]">
+                      <div className="relative h-44 overflow-hidden">
+                        <Image
+                          src={PATH_PHOTOS[index % PATH_PHOTOS.length]}
+                          alt={service.title}
+                          fill
+                          sizes="(min-width: 768px) 33vw, 100vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        />
+                        <span className="absolute right-4 top-4 rounded-full bg-white/85 px-3 py-1 font-[family-name:var(--font-display)] text-lg leading-none text-[var(--color-primary-600)] backdrop-blur-sm">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+                      <div className="p-7 pt-6">
                       <span className="inline-flex rounded-xl bg-[var(--color-primary-50)] p-3">
                         <Icon className="h-5 w-5 text-[var(--color-primary-600)]" />
                       </span>
@@ -780,6 +835,7 @@ export function HomePage({
                           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                         </Link>
                       ) : null}
+                      </div>
                     </article>
                   </Reveal>
                 );
@@ -978,7 +1034,17 @@ export function HomePage({
       {/* ══════════════ 5 · ORDERING GATE — the single dark band (approved) ══════════════ */}
       <section className="bg-white px-4 pb-[clamp(3rem,5vw,4.5rem)] lg:px-8">
         <div className="relative overflow-hidden rounded-[2rem] bg-[var(--color-surface-dark)] px-6 py-[clamp(3.5rem,6vw,5.5rem)] text-center">
-          <MeshBackdrop tone="dark" />
+          <div aria-hidden className="absolute inset-0">
+            <Image
+              src="/images/food/spice-table.jpg"
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-[var(--color-surface-dark)]/82" />
+            <div className="grain-overlay grain-overlay-strong" />
+          </div>
           <div className="relative z-10">
             {content.todaysMenu.eyebrow ? (
               <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/50">
