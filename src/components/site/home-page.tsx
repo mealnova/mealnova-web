@@ -516,6 +516,15 @@ const FOOD_STRIP = [
   { src: "/images/food/chaat.jpg", alt: "Samosas with green chutney" },
 ];
 
+const FOOD_GALLERY = [
+  { src: "/images/food/feast-overhead.jpg", caption: "Pav bhaji nights", span: "md:col-span-7 md:row-span-2", h: "h-72 md:h-full" },
+  { src: "/images/food/dosa.jpg", caption: "South Indian mornings", span: "md:col-span-5", h: "h-64" },
+  { src: "/images/food/chai-time.jpg", caption: "Chai, brewed slow", span: "md:col-span-5", h: "h-64" },
+  { src: "/images/food/spread-table.jpg", caption: "Thali, the classic way", span: "md:col-span-4", h: "h-60" },
+  { src: "/images/food/paneer-tikka.jpg", caption: "From the kadai", span: "md:col-span-4", h: "h-60" },
+  { src: "/images/food/thali-real.jpg", caption: "Served fresh, daily", span: "md:col-span-4", h: "h-60" },
+];
+
 const PATH_PHOTOS = [
   "/images/food/thali-real.jpg",
   "/images/food/biryani.jpg",
@@ -935,6 +944,19 @@ export function HomePage({
         </div>
       </section>
 
+      {/* ══════════════ 3b · EDITORIAL BAND — full-bleed photography ══════════════ */}
+      <section aria-hidden className="relative h-[clamp(16rem,40vw,26rem)] overflow-hidden">
+        <Image
+          src="/images/food/feast-overhead.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white opacity-30" />
+        <div className="grain-overlay" />
+      </section>
+
       {/* ══════════════ 4 · HOW IT WORKS — bento, one emerald accent tile ══════════════ */}
       <section className="bg-white py-[clamp(4rem,7vw,6.5rem)]">
         <div className="container-max">
@@ -1028,6 +1050,39 @@ export function HomePage({
               ))}
             </div>
           ) : null}
+        </div>
+      </section>
+
+      {/* ══════════════ 4b · TASTE GALLERY — bento photo mosaic ══════════════ */}
+      <section className="bg-[var(--color-surface)] py-[clamp(4rem,7vw,6.5rem)]">
+        <div className="container-max">
+          <div className="grid items-end gap-6 lg:grid-cols-[1fr_minmax(0,22rem)]">
+            <div>
+              <div className="eyebrow text-[var(--color-primary-600)]">From our kitchens</div>
+              <h2 className="mt-3 font-[family-name:var(--font-display)] text-[clamp(1.8rem,3.2vw,2.6rem)] leading-[1.1] font-normal text-[var(--color-text-primary)]">
+                Made fresh. Plated with pride.
+              </h2>
+            </div>
+          </div>
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-12 md:[grid-auto-rows:1fr]">
+            {FOOD_GALLERY.map((photo) => (
+              <Reveal key={photo.src} className={photo.span}>
+                <figure className={`group relative overflow-hidden rounded-2xl ${photo.h} w-full cursor-pointer`}>
+                  <Image
+                    src={photo.src}
+                    alt={photo.caption}
+                    fill
+                    sizes="(min-width: 768px) 40vw, 100vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(16,24,25,0.55)] via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <figcaption className="absolute inset-x-0 bottom-0 translate-y-3 p-5 font-[family-name:var(--font-display)] text-lg text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                    {photo.caption}
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
