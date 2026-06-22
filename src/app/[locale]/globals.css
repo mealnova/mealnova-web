@@ -335,20 +335,20 @@
 .display-page,
 .text-h1 {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 3vw + 0.5rem, 3rem);
-  line-height: 1.12;
+  font-size: clamp(2.5rem, 4.6vw, 4.25rem);
+  line-height: 1.04;
   font-weight: 400;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.022em;
   text-wrap: balance;
 }
 
 .section-title,
 .text-h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.5vw + 0.4rem, 2.25rem);
-  line-height: 1.2;
+  font-size: var(--fs-section);
+  line-height: 1.07;
   font-weight: 400;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 

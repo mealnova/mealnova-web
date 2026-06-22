@@ -4,13 +4,15 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { ArrowRight, type LucideIcon } from "lucide-react";
-import { motion } from "framer-motion";
-import {
-  Button,
-  type ButtonProps,
-} from "@/components/ui/button";
+import { Button, type ButtonProps } from "@/components/ui/button";
 import { getPathLocale, localizeHref } from "@/lib/locale-paths";
 import { cn } from "@/lib/utils";
+import {
+  MaskedLines,
+  LedgerRule,
+  MagneticButton,
+  RevealUp,
+} from "@/components/ui/motion-primitives";
 
 type Action = {
   href: string;
@@ -25,14 +27,56 @@ type Metric = {
   detail?: string;
 };
 
+/* ── Title that reveals line-by-line when given a string ───────────────────── */
+function splitLines(text: string, maxLines = 2): string[] {
+  const words = text.trim().split(/\s+/);
+  if (words.length <= 3) return [text];
+  const lines = Math.min(maxLines, Math.max(1, Math.round(words.length / 4)));
+  const per = Math.ceil(words.length / lines);
+  const out: string[] = [];
+  for (let i = 0; i < words.length; i += per) out.push(words.slice(i, i + per).join(" "));
+  return out;
+}
+
+function DisplayTitle({
+  title,
+  className,
+  maxLines = 2,
+}: {
+  title: ReactNode;
+  className?: string;
+  maxLines?: number;
+}) {
+  if (typeof title === "string") {
+    return (
+      <span className={className}>
+        <MaskedLines lines={splitLines(title, maxLines)} />
+      </span>
+    );
+  }
+  return <span className={className}>{title}</span>;
+}
+
+/* ── Ledger eyebrow — warm-brown small-caps marker + drawn hairline ────────── */
+function LedgerEyebrow({ children, center }: { children: ReactNode; center?: boolean }) {
+  return (
+    <div className={cn("flex items-center gap-4", center && "justify-center")}>
+      <span className="ledger-index">{children}</span>
+      <LedgerRule className={cn("max-w-[5rem]", center && "max-w-[3rem]")} />
+    </div>
+  );
+}
+
 export function ActionButton({
   action,
   size = "lg",
   className,
+  magnetic = false,
 }: {
   action: Action;
   size?: ButtonProps["size"];
   className?: string;
+  magnetic?: boolean;
 }) {
   const pathname = usePathname();
   const locale = getPathLocale(pathname);
@@ -43,32 +87,15 @@ export function ActionButton({
       {action.icon ?? <ArrowRight className="h-4 w-4" />}
     </>
   );
-
   const isInternal = href.startsWith("/") || href.startsWith("#");
 
-  if (isInternal) {
-    return (
-      <Button
-        variant={action.variant ?? "primary"}
-        size={size}
-        className={className}
-        asChild
-      >
-        <Link href={href}>{content}</Link>
-      </Button>
-    );
-  }
-
-  return (
-    <Button
-      variant={action.variant ?? "primary"}
-      size={size}
-      className={className}
-      asChild
-    >
-      <a href={href}>{content}</a>
+  const button = (
+    <Button variant={action.variant ?? "primary"} size={size} className={className} asChild>
+      {isInternal ? <Link href={href}>{content}</Link> : <a href={href}>{content}</a>}
     </Button>
   );
+
+  return magnetic ? <MagneticButton>{button}</MagneticButton> : button;
 }
 
 export function SectionHeader({
@@ -93,38 +120,38 @@ export function SectionHeader({
         className,
       )}
     >
-      {eyebrow ? <div className="eyebrow">{eyebrow}</div> : null}
-      <h2 className="section-title mt-4 text-[var(--color-text-primary)]">{title}</h2>
+      {eyebrow ? <LedgerEyebrow center={align === "center"}>{eyebrow}</LedgerEyebrow> : null}
+      <h2 className="section-title mt-5 text-[var(--color-text-primary)]">
+        <DisplayTitle title={title} />
+      </h2>
       {description ? (
-        <p className="body-large mt-4 text-pretty">{description}</p>
+        <p className={cn("body-large mt-4 text-pretty", align === "center" && "mx-auto")}>
+          {description}
+        </p>
       ) : null}
     </div>
   );
 }
 
-export function MetricGrid({
-  items,
-  className,
-}: {
-  items: Metric[];
-  className?: string;
-}) {
+export function MetricGrid({ items, className }: { items: Metric[]; className?: string }) {
   return (
-    <div className={cn("grid gap-4 sm:grid-cols-2 xl:grid-cols-4", className)}>
-      {items.map((item) => (
-        <div key={`${item.label}-${item.value}`} className="site-panel-static p-5">
-          <div className="text-3xl font-bold tracking-[-0.04em] text-[var(--color-text-primary)]">
+    <div className={cn("grid gap-x-8 gap-y-7 sm:grid-cols-2 xl:grid-cols-4", className)}>
+      {items.map((item, i) => (
+        <RevealUp key={`${item.label}-${item.value}`} delay={i * 0.06}>
+          <div className="ledger-index mb-2">{String(i + 1).padStart(2, "0")}</div>
+          <LedgerRule className="mb-3 max-w-[3rem]" />
+          <div className="display-section leading-none text-[var(--color-primary-600)]">
             {item.value}
           </div>
-          <div className="mt-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
+          <div className="mt-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
             {item.label}
           </div>
           {item.detail ? (
-            <p className="mt-1 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+            <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-text-secondary)]">
               {item.detail}
             </p>
           ) : null}
-        </div>
+        </RevealUp>
       ))}
     </div>
   );
@@ -152,52 +179,49 @@ export function InfoCard({
   return (
     <div
       className={cn(
-        dark ? "site-panel-dark" : "card-interactive gradient-border",
-        "h-full p-6 lg:p-7",
+        "group relative h-full overflow-hidden rounded-2xl p-7 transition-all duration-300",
+        dark
+          ? "text-white shadow-[0_24px_60px_-30px_rgba(0,0,0,0.5)]"
+          : "border border-[var(--color-text-primary)]/8 bg-white shadow-[0_1px_2px_rgba(16,24,25,0.03)] hover:-translate-y-1 hover:border-[var(--color-primary-500)]/25 hover:shadow-[0_18px_44px_-22px_rgba(16,24,25,0.18)]",
         className,
       )}
+      style={dark ? { background: "linear-gradient(145deg, var(--dp-from), var(--dp-to))" } : undefined}
     >
-      {Icon ? (
-        <span
+      {dark ? <div className="grain-overlay" /> : null}
+      <div className="relative">
+        {Icon ? (
+          <span
+            className={cn(
+              "inline-flex h-11 w-11 items-center justify-center rounded-xl",
+              dark ? "bg-white/10 text-white" : "bg-[var(--color-primary-50)] text-[var(--color-primary-600)]",
+            )}
+          >
+            <Icon className="h-5 w-5" />
+          </span>
+        ) : null}
+        {eyebrow ? (
+          <div className={cn("ledger-index mt-5", dark && "text-white/55")}>{eyebrow}</div>
+        ) : null}
+        <h3
           className={cn(
-            "inline-flex h-11 w-11 items-center justify-center rounded-lg border",
-            dark
-              ? "border-white/10 bg-white/5 text-white"
-              : "border-black/10 bg-[var(--color-surface)] text-[var(--color-primary-500)]",
+            "mt-4 text-h3",
+            dark ? "text-white" : "text-[var(--color-text-primary)]",
           )}
         >
-          <Icon className="h-5 w-5" />
-        </span>
-      ) : null}
-      {eyebrow ? (
-        <div
-          className={cn(
-            "muted-label mt-5",
-            dark && "text-[var(--color-secondary-500)]",
-          )}
-        >
-          {eyebrow}
-        </div>
-      ) : null}
-      <h3
-        className={cn(
-          "mt-4 text-h3",
-          dark ? "text-white" : "text-[var(--color-text-primary)]",
-        )}
-      >
-        {title}
-      </h3>
-      {description ? (
-        <p
-          className={cn(
-            "mt-3 text-sm leading-relaxed",
-            dark ? "text-white/65" : "text-[var(--color-text-secondary)]",
-          )}
-        >
-          {description}
-        </p>
-      ) : null}
-      {children ? <div className="mt-5">{children}</div> : null}
+          {title}
+        </h3>
+        {description ? (
+          <p
+            className={cn(
+              "mt-3 text-sm leading-relaxed",
+              dark ? "text-white/68" : "text-[var(--color-text-secondary)]",
+            )}
+          >
+            {description}
+          </p>
+        ) : null}
+        {children ? <div className="mt-5">{children}</div> : null}
+      </div>
     </div>
   );
 }
@@ -219,89 +243,55 @@ export function PageHero({
   aside?: ReactNode;
   className?: string;
 }) {
-  const metricGridClass = aside
-    ? "sm:grid-cols-2"
-    : "sm:grid-cols-2 xl:grid-cols-4";
-
-  const metricValueClass = (value: ReactNode) => {
-    const text =
-      typeof value === "string" || typeof value === "number" ? String(value) : "";
-
-    if (text.length > 18) {
-      return "text-[clamp(1rem,1.55vw,1.35rem)] break-words leading-tight";
-    }
-
-    if (text.length > 10) {
-      return "text-[clamp(1.15rem,1.8vw,1.65rem)] break-words leading-tight";
-    }
-
-    return "text-[2.2rem]";
-  };
-
   return (
     <section className={cn("page-hero", className)}>
-      <div className="container-max">
+      <div className="container-max relative z-10">
         <div className={cn("page-hero-grid", !aside && "max-w-4xl")}>
-          <motion.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          >
-            {eyebrow ? <div className="eyebrow">{eyebrow}</div> : null}
-            <h1 className="display-page mt-5 text-[var(--color-text-primary)]">{title}</h1>
-            <p className="body-large mt-5 max-w-2xl text-pretty">
-              {description}
-            </p>
+          <div>
+            {eyebrow ? <LedgerEyebrow>{eyebrow}</LedgerEyebrow> : null}
+            <h1 className="display-page mt-6 text-[var(--color-text-primary)]">
+              <DisplayTitle title={title} maxLines={3} />
+            </h1>
+            <p className="body-large mt-6 max-w-2xl text-pretty">{description}</p>
 
             {actions?.length ? (
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                {actions.map((action) => (
-                  <ActionButton key={action.href + action.label} action={action} />
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                {actions.map((action, i) => (
+                  <ActionButton
+                    key={action.href + action.label}
+                    action={action}
+                    magnetic={i === 0}
+                  />
                 ))}
               </div>
             ) : null}
 
             {metrics?.length ? (
-              <div className={cn("mt-10 grid gap-4", metricGridClass)}>
-                {metrics.map((metric, index) => (
-                  <motion.div
-                    key={`${metric.label}-${metric.value}`}
-                    className="site-panel-static flex min-h-[8.25rem] flex-col justify-center px-5 py-5 text-center"
-                    initial={false}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.3 + index * 0.08 }}
-                  >
-                    <div
-                      className={cn(
-                        "mx-auto max-w-full font-bold tracking-[-0.04em] text-[var(--color-text-primary)]",
-                        metricValueClass(metric.value),
-                      )}
-                    >
-                      {metric.value}
-                    </div>
-                    <div className="mt-2.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
-                      {metric.label}
-                    </div>
-                    {metric.detail ? (
-                      <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-                        {metric.detail}
-                      </p>
-                    ) : null}
-                  </motion.div>
-                ))}
+              <div className="mt-12 max-w-2xl">
+                <LedgerRule />
+                <div className={cn("grid gap-x-8 gap-y-6 pt-6", aside ? "grid-cols-2" : "grid-cols-2 sm:grid-cols-4")}>
+                  {metrics.map((metric, index) => (
+                    <RevealUp key={`${metric.label}-${metric.value}`} delay={index * 0.06}>
+                      <div className="ledger-index mb-1.5">{String(index + 1).padStart(2, "0")}</div>
+                      <div className="display-section leading-none text-[var(--color-primary-600)]">
+                        {metric.value}
+                      </div>
+                      <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
+                        {metric.label}
+                      </div>
+                      {metric.detail ? (
+                        <p className="mt-1.5 text-xs leading-relaxed text-[var(--color-text-secondary)]">
+                          {metric.detail}
+                        </p>
+                      ) : null}
+                    </RevealUp>
+                  ))}
+                </div>
               </div>
             ) : null}
-          </motion.div>
+          </div>
 
-          {aside ? (
-            <motion.div
-              initial={false}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-            >
-              {aside}
-            </motion.div>
-          ) : null}
+          {aside ? <RevealUp delay={0.12}>{aside}</RevealUp> : null}
         </div>
       </div>
     </section>
@@ -324,24 +314,28 @@ export function PageCta({
   return (
     <section className={cn("page-section", className)}>
       <div className="container-max">
-        <div className="relative overflow-hidden rounded-xl border border-white/[0.06] bg-[linear-gradient(145deg,var(--dp-from),var(--dp-to))] px-8 py-10 lg:px-14 lg:py-14">
-          {/* Subtle gold accent line */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--color-secondary-500)] to-transparent opacity-60" />
-
-          <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="relative overflow-hidden rounded-[2rem] border border-[var(--color-text-primary)]/8 bg-[var(--color-surface-card)] px-8 py-[clamp(3rem,5vw,4.5rem)] lg:px-14">
+          <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
             <div className="max-w-2xl">
-              {eyebrow ? <div className="eyebrow text-[var(--color-secondary-500)]">{eyebrow}</div> : null}
-              <h2 className="section-title mt-4 text-white">{title}</h2>
-              <p className="mt-4 text-base leading-relaxed text-white/55">
+              {eyebrow ? <LedgerEyebrow>{eyebrow}</LedgerEyebrow> : null}
+              <h2 className="section-title mt-5 text-[var(--color-text-primary)]">
+                <DisplayTitle title={title} />
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-[var(--color-text-secondary)]">
                 {description}
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
-              {actions.map((action) => (
+              {actions.map((action, i) => (
                 <ActionButton
                   key={action.href + action.label}
                   action={action}
-                  className={action.variant === "outline" ? "border-white/15 bg-white/5 text-white hover:bg-white/10" : ""}
+                  magnetic={i === 0}
+                  className={
+                    action.variant === "outline"
+                      ? "border-[var(--color-text-primary)]/12 bg-white text-[var(--color-text-primary)] hover:border-[var(--color-text-primary)]/25"
+                      : ""
+                  }
                 />
               ))}
             </div>
