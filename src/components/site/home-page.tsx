@@ -47,6 +47,12 @@ import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { Sparkles } from "@/components/ui/sparkles";
 import { MeshBackdrop } from "@/components/ui/mesh-backdrop";
 import { StatCounter } from "@/components/ui/stat-counter";
+import {
+  MaskedLines,
+  LedgerRule,
+  MagneticButton,
+  RevealUp,
+} from "@/components/ui/motion-primitives";
 import { InfoCard, PageCta, SectionHeader } from "@/components/site/page-primitives";
 import { StatsSection } from "@/components/sections/stats";
 import {
@@ -583,15 +589,15 @@ export function HomePage({
       ? sourceContent.todaysMenu.secondaryAction
       : { href: "/menu", label: "Browse menu", variant: "outline" as const };
 
-  // Parallax for hero
-  const heroRef = useRef(null);
-  const { scrollYProgress: heroScroll } = useScroll({
-    target: heroRef,
+  // SIGNATURE #1 — sticky-pinned scroll-scrubbed hero
+  const heroPinRef = useRef(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroPinRef,
     offset: ["start start", "end start"],
   });
-  const heroY = useTransform(heroScroll, [0, 1], ["0%", "20%"]);
-  const heroScale = useTransform(heroScroll, [0, 1], [1, 0.95]);
-  const heroBlur = useTransform(heroScroll, [0, 0.8], [0, 6]);
+  const heroPlateY = useTransform(heroProgress, [0, 1], ["0%", "16%"]);
+  const heroPlateScale = useTransform(heroProgress, [0, 1], [1.04, 1.12]);
+  const heroAsideOpacity = useTransform(heroProgress, [0, 0.5, 0.92], [1, 1, 0]);
 
   if (sourceContent == null) {
     if (isPending) {
@@ -631,103 +637,106 @@ export function HomePage({
     icon: [ClipboardCheck, ChefHat, Clock3, BadgeCheck][index] ?? BadgeCheck,
   }));
 
+  const heroLines = (() => {
+    const words = heroTitle.trim().split(/\s+/);
+    if (words.length <= 3) return [heroTitle];
+    const per = Math.ceil(words.length / 3);
+    return [
+      words.slice(0, per).join(" "),
+      words.slice(per, per * 2).join(" "),
+      words.slice(per * 2).join(" "),
+    ].filter(Boolean);
+  })();
+
   return (
     <>
-      {/* ══════════════ 1 · HERO — light, calm, professional ══════════════ */}
+      {/* ══════════════ 1 · HERO — editorial service ledger (SIGNATURE) ══════════════ */}
       <section
-        ref={heroRef}
+        ref={heroPinRef}
         className="relative isolate overflow-hidden bg-[var(--color-surface)]"
       >
-        <motion.div style={{ y: heroY }} className="absolute inset-0">
-          <MeshBackdrop tone="light" />
+        <MeshBackdrop tone="light" />
+
+        {/* LCP plate — full-height cinematic photography on the right */}
+        <motion.div
+          style={{ y: heroPlateY, scale: heroPlateScale }}
+          className="absolute right-0 top-0 hidden h-full w-[44%] origin-center lg:block"
+        >
+          <Image
+            src="/images/food/thali-real.jpg"
+            alt="Mealnova daily thali — dal, rice, sabzi, roti served fresh"
+            fill
+            priority
+            sizes="44vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-surface)] via-[var(--color-surface)]/55 to-transparent" />
+          <div className="absolute inset-y-0 left-0 w-px bg-[var(--color-secondary-500)]/30" />
         </motion.div>
 
-        <motion.div
-          style={{ scale: heroScale }}
-          className="container-max relative z-10 pb-16 pt-[clamp(7.5rem,13vh,9.5rem)]"
-        >
-          {content.hero.eyebrow ? (
-            <motion.span
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary-500)]/15 bg-[var(--color-primary-50)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--color-primary-600)]"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-primary-500)]" />
-              {content.hero.eyebrow}
-            </motion.span>
-          ) : null}
+        <div className="container-max relative z-10 grid min-h-[clamp(34rem,82vh,52rem)] items-center pb-16 pt-[clamp(7rem,12vh,9rem)]">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-4">
+              <span className="ledger-index">{content.hero.eyebrow || "Est. 2009 · Pune"}</span>
+              <LedgerRule className="max-w-[6rem]" />
+            </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 max-w-4xl font-[family-name:var(--font-display)] text-[clamp(2.5rem,5.4vw,4.3rem)] leading-[1.06] font-normal tracking-[-0.015em] text-[var(--color-text-primary)]"
-          >
-            {heroTitle}
-          </motion.h1>
+            <h1 className="display-hero mt-7 text-[var(--color-text-primary)]">
+              <MaskedLines lines={heroLines} />
+            </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-5 max-w-2xl text-[1.05rem] leading-relaxed text-[var(--color-text-secondary)]"
-          >
-            {heroDescription}
-          </motion.p>
+            <motion.div style={{ opacity: heroAsideOpacity }}>
+              <p className="mt-7 max-w-xl text-[1.075rem] leading-relaxed text-[var(--color-text-secondary)]">
+                {heroDescription}
+              </p>
 
-          {heroActions.length > 0 ? (
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-8 flex flex-wrap items-center gap-3"
-            >
-              {heroActions.map((action, index) =>
-                index === 0 ? (
-                  <Button key={action.href} variant="primary" size="lg" asChild>
-                    <Link href={localizeHref(action.href, locale)}>
-                      {action.label}
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                ) : (
-                  <Link
-                    key={action.href}
-                    href={localizeHref(action.href, locale)}
-                    className="inline-flex items-center gap-2 rounded-full border border-[var(--color-text-primary)]/12 bg-white px-6 py-3 text-sm font-semibold text-[var(--color-text-primary)] shadow-sm transition-colors duration-200 hover:border-[var(--color-text-primary)]/25"
-                  >
-                    {action.label}
-                  </Link>
-                ),
-              )}
-            </motion.div>
-          ) : null}
+              {heroActions.length > 0 ? (
+                <div className="mt-9 flex flex-wrap items-center gap-3">
+                  {heroActions.map((action, index) =>
+                    index === 0 ? (
+                      <MagneticButton key={action.href}>
+                        <Button variant="primary" size="lg" asChild>
+                          <Link href={localizeHref(action.href, locale)}>
+                            {action.label}
+                            <ArrowRight className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </MagneticButton>
+                    ) : (
+                      <Link
+                        key={action.href}
+                        href={localizeHref(action.href, locale)}
+                        className="inline-flex items-center gap-2 rounded-full border border-[var(--color-text-primary)]/12 bg-white px-6 py-3 text-sm font-semibold text-[var(--color-text-primary)] shadow-sm transition-colors duration-200 hover:border-[var(--color-text-primary)]/25"
+                      >
+                        {action.label}
+                      </Link>
+                    ),
+                  )}
+                </div>
+              ) : null}
 
-          {heroMetrics.length > 0 ? (
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-14 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4"
-            >
-              {heroMetrics.map((metric) => (
-                <div
-                  key={metric.label}
-                  className="rounded-2xl border border-[var(--color-text-primary)]/8 bg-white px-5 py-4 text-center shadow-[0_1px_2px_rgba(16,24,25,0.04),0_10px_28px_-18px_rgba(16,24,25,0.12)]"
-                >
-                  <StatCounter
-                    value={metric.value}
-                    className="font-[family-name:var(--font-display)] text-[1.8rem] leading-none text-[var(--color-primary-600)]"
-                  />
-                  <div className="mt-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
-                    {metric.label}
+              {heroMetrics.length > 0 ? (
+                <div className="mt-14 max-w-2xl">
+                  <LedgerRule />
+                  <div className="grid grid-cols-2 gap-x-8 gap-y-6 pt-6 sm:grid-cols-4">
+                    {heroMetrics.map((metric, i) => (
+                      <div key={metric.label}>
+                        <div className="ledger-index mb-2">{String(i + 1).padStart(2, "0")}</div>
+                        <StatCounter
+                          value={metric.value}
+                          className="display-section block leading-none text-[var(--color-primary-600)]"
+                        />
+                        <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
+                          {metric.label}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
+              ) : null}
             </motion.div>
-          ) : null}
-        </motion.div>
+          </div>
+        </div>
 
         {/* Trusted-by marquee — quiet, neutral */}
         <div className="relative z-10 border-t border-[var(--color-text-primary)]/8 bg-white/70 py-5 backdrop-blur-sm">

@@ -60,9 +60,13 @@
   --color-gold-light: #fef9c3;
   --color-gold-dark: #854d0e;
 
-  --font-heading: "Inter", "Noto Sans Devanagari", system-ui, sans-serif;
-  --font-body: "Inter", "Noto Sans Devanagari", system-ui, sans-serif;
-  --font-display: "DM Serif Display", Georgia, serif;
+  --font-heading: "Manrope", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-body: "Manrope", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-display: "Instrument Serif", "Noto Sans Devanagari", Georgia, serif;
+
+  /* Editorial fluid type scale */
+  --fs-hero: clamp(2.75rem, 6.2vw, 5.5rem);
+  --fs-section: clamp(1.9rem, 3.6vw, 3.2rem);
 
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
@@ -891,9 +895,37 @@
 .display-hero {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(2.7rem, 5.6vw, 4.75rem);
-  line-height: 1.04;
+  font-size: var(--fs-hero);
+  line-height: 1.02;
   letter-spacing: -0.025em;
+}
+.display-section {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-section);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+}
+
+/* Ledger motif — warm-brown hairline rule + small-caps index marker */
+.ledger-rule {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--color-secondary-500) 55%, transparent),
+    color-mix(in srgb, var(--color-secondary-500) 12%, transparent)
+  );
+  transform-origin: left center;
+}
+.ledger-index {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-secondary-500);
+  font-variant-numeric: tabular-nums;
 }
 
 /* Soft hover lift used by bento/glass cards — no layout shift */
