@@ -712,6 +712,20 @@ export function HomePage({
                 </div>
               ) : null}
 
+              {/* Mobile/tablet hero image — desktop shows the side plate (hidden lg:block) */}
+              <div className="mt-9 overflow-hidden rounded-2xl shadow-[0_24px_60px_-30px_rgba(16,24,25,0.4)] lg:hidden">
+                <div className="relative aspect-[16/10]">
+                  <Image
+                    src="/images/food/thali-real.jpg"
+                    alt="Mealnova daily thali — dal, rice, sabzi, roti served fresh"
+                    fill
+                    priority
+                    sizes="100vw"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+
               {heroMetrics.length > 0 ? (
                 <div className="mt-14 max-w-2xl">
                   <LedgerRule />
