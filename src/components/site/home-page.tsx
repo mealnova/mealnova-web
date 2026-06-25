@@ -77,8 +77,6 @@ type DisplayService = Omit<ServiceOffering, "icon"> & { icon: LucideIcon };
 
 const fallbackClientNames: string[] = [];
 const fallbackTestimonials: Testimonial[] = [];
-const operationsScrollImage =
-  "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1600&q=80";
 const searchServiceHighlights = [
   {
     icon: Building2,
@@ -765,29 +763,17 @@ export function HomePage({
         </div>
       </section>
 
-      {/* ══════════════ 1b · TASTE STRIP — framed food photography ══════════════ */}
-      <section className="overflow-hidden border-b border-[var(--color-text-primary)]/8 bg-white py-12">
-        <InfiniteSlider className="flex w-full items-center" duration={60} durationOnHover={140} gap={28}>
-          {FOOD_STRIP.map((photo, index) => (
-            <figure
-              key={photo.src}
-              className={
-                (index % 2 === 0
-                  ? "rounded-t-[110px] rounded-b-2xl "
-                  : "rounded-2xl ") +
-                (index % 3 === 0 ? "-rotate-1 " : index % 3 === 1 ? "rotate-1 " : "") +
-                "shrink-0 overflow-hidden border border-[var(--color-text-primary)]/10 bg-white p-1.5 shadow-[0_14px_34px_-18px_rgba(16,24,25,0.25)]"
-              }
-            >
+      {/* ══════════════ 1b · TASTE STRIP — seamless food ribbon (edge-to-edge, no frames) ══════════════ */}
+      <section className="overflow-hidden bg-white">
+        <InfiniteSlider className="flex w-full items-stretch" duration={60} durationOnHover={140} gap={0}>
+          {FOOD_STRIP.map((photo) => (
+            <figure key={photo.src} className="shrink-0 overflow-hidden">
               <Image
                 src={photo.src}
                 alt={photo.alt}
                 width={420}
                 height={520}
-                className={
-                  (index % 2 === 0 ? "rounded-t-[104px] rounded-b-xl " : "rounded-xl ") +
-                  "h-[230px] w-[180px] object-cover sm:h-[270px] sm:w-[215px]"
-                }
+                className="h-[240px] w-[190px] object-cover sm:h-[300px] sm:w-[240px]"
               />
             </figure>
           ))}
@@ -1073,10 +1059,10 @@ export function HomePage({
               </h2>
             </div>
           </div>
-          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-12 md:[grid-auto-rows:1fr]">
+          <div className="mt-10 grid grid-cols-1 gap-0 overflow-hidden rounded-[1.75rem] md:grid-cols-12 md:[grid-auto-rows:1fr]">
             {FOOD_GALLERY.map((photo) => (
               <Reveal key={photo.src} className={photo.span}>
-                <figure className={`group relative overflow-hidden rounded-2xl ${photo.h} w-full cursor-pointer`}>
+                <figure className={`group relative overflow-hidden ${photo.h} w-full cursor-pointer`}>
                   <Image
                     src={photo.src}
                     alt={photo.caption}

@@ -278,22 +278,16 @@ function StoryCmsPage({
           </div>
 
           <div className="order-first mx-auto w-full max-w-[440px] lg:order-none">
-            <div className="relative">
-              <div className="absolute -right-8 top-8 h-24 w-24 rounded-full bg-[var(--color-primary-500)]/10" />
-              <div className="absolute -left-8 bottom-10 h-28 w-28 rounded-full bg-[var(--color-secondary-500)]/10" />
-              <div className="relative overflow-hidden rounded-lg border-[6px] border-[var(--color-primary-100)] bg-white shadow-[0_28px_80px_-45px_rgba(16,24,25,0.7)]">
-                <div className="relative aspect-[4/5]">
-                  <Image
-                    src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1200&q=80"
-                    alt={`${page.title} catering service`}
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 380px, 88vw"
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-dark)]/30 via-transparent to-transparent" />
-                </div>
-              </div>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_28px_80px_-45px_rgba(16,24,25,0.7)]">
+              <Image
+                src="/images/food/spread-table.jpg"
+                alt={`${page.title} — Mealnova catering`}
+                fill
+                priority
+                sizes="(min-width: 1024px) 380px, 88vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-dark)]/35 via-transparent to-transparent" />
             </div>
           </div>
 
