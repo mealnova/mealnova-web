@@ -668,8 +668,7 @@ export function HomePage({
             sizes="44vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-surface)] via-[var(--color-surface)]/55 to-transparent" />
-          <div className="absolute inset-y-0 left-0 w-px bg-[var(--color-secondary-500)]/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-surface)] via-[var(--color-surface)]/60 to-transparent" />
         </motion.div>
 
         <div className="container-max relative z-10 grid min-h-[clamp(34rem,82vh,52rem)] items-center pb-16 pt-[clamp(7rem,12vh,9rem)]">
