@@ -64,9 +64,9 @@
   --font-body: "Manrope", "Noto Sans Devanagari", system-ui, sans-serif;
   --font-display: "Instrument Serif", "Noto Sans Devanagari", Georgia, serif;
 
-  /* Editorial fluid type scale */
-  --fs-hero: clamp(2.75rem, 6.2vw, 5.5rem);
-  --fs-section: clamp(1.9rem, 3.6vw, 3.2rem);
+  /* Editorial fluid type scale — keeps scaling up to ~1850px so wide screens stay reactive */
+  --fs-hero: clamp(2.75rem, 5.8vw, 6.5rem);
+  --fs-section: clamp(1.9rem, 3.5vw, 3.75rem);
 
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
@@ -91,7 +91,9 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 
-  --container-max: 1280px;
+  /* Fluid: tracks the viewport (94vw) up to a 1480px cap, so dragging the window
+     always reflows content instead of locking at a fixed width on wide screens */
+  --container-max: min(94vw, 1480px);
   --container-narrow: 720px;
 }
 
