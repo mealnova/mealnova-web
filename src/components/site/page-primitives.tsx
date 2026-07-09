@@ -12,6 +12,7 @@ import {
   LedgerRule,
   MagneticButton,
   RevealUp,
+  TiltCard,
 } from "@/components/ui/motion-primitives";
 
 type Action = {
@@ -177,12 +178,13 @@ export function InfoCard({
   const dark = tone === "dark";
 
   return (
-    <div
+    <TiltCard
+      max={6}
       className={cn(
         "group relative h-full overflow-hidden rounded-2xl p-7 transition-all duration-300",
         dark
           ? "text-white shadow-[0_24px_60px_-30px_rgba(0,0,0,0.5)]"
-          : "border border-[var(--color-text-primary)]/8 bg-white shadow-[0_1px_2px_rgba(16,24,25,0.03)] hover:-translate-y-1 hover:border-[var(--color-primary-500)]/25 hover:shadow-[0_18px_44px_-22px_rgba(16,24,25,0.18)]",
+          : "border border-[var(--color-text-primary)]/8 bg-white shadow-[0_1px_2px_rgba(16,24,25,0.03)] hover:border-[var(--color-primary-500)]/25 hover:shadow-[0_18px_44px_-22px_rgba(16,24,25,0.18)]",
         className,
       )}
       style={dark ? { background: "linear-gradient(145deg, var(--dp-from), var(--dp-to))" } : undefined}
@@ -222,7 +224,7 @@ export function InfoCard({
         ) : null}
         {children ? <div className="mt-5">{children}</div> : null}
       </div>
-    </div>
+    </TiltCard>
   );
 }
 

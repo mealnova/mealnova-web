@@ -166,6 +166,82 @@ export function MagneticButton({
 }
 
 /** RevealUp — generic reduced-motion-safe entrance for blocks. */
+/* ── 3D tilt card — perspective + pointer-tracked rotation with a glare sheen.
+   Reduced-motion & touch safe (no mousemove → stays flat). Consumer supplies the
+   card surface classes (relative, overflow-hidden, rounded-*, bg/border/shadow). ── */
+export function TiltCard({
+  children,
+  className,
+  style,
+  max = 7,
+  glare = true,
+}: {
+  children: ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  max?: number;
+  glare?: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const rx = useMotionValue(0);
+  const ry = useMotionValue(0);
+  const gx = useMotionValue(50);
+  const gy = useMotionValue(50);
+  const cfg = { stiffness: 150, damping: 15, mass: 0.4 };
+  const srx = useSpring(rx, cfg);
+  const sry = useSpring(ry, cfg);
+  const sgx = useSpring(gx, cfg);
+  const sgy = useSpring(gy, cfg);
+  const glareBg = useTransform(
+    [sgx, sgy],
+    ([x, y]: number[]) =>
+      `radial-gradient(500px circle at ${x}% ${y}%, rgba(255,255,255,0.28), transparent 45%)`,
+  );
+
+  function onMove(e: React.MouseEvent) {
+    if (reduce || !ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width;
+    const py = (e.clientY - r.top) / r.height;
+    ry.set((px - 0.5) * max * 2);
+    rx.set((0.5 - py) * max * 2);
+    gx.set(px * 100);
+    gy.set(py * 100);
+  }
+  function onLeave() {
+    rx.set(0);
+    ry.set(0);
+    gx.set(50);
+    gy.set(50);
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      style={{
+        ...style,
+        rotateX: reduce ? 0 : srx,
+        rotateY: reduce ? 0 : sry,
+        transformPerspective: 1000,
+        transformStyle: "preserve-3d",
+      }}
+      className={className}
+    >
+      {children}
+      {glare && !reduce ? (
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          style={{ background: glareBg }}
+        />
+      ) : null}
+    </motion.div>
+  );
+}
+
 export function RevealUp({
   children,
   className,

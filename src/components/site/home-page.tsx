@@ -52,6 +52,7 @@ import {
   LedgerRule,
   MagneticButton,
   RevealUp,
+  TiltCard,
 } from "@/components/ui/motion-primitives";
 import { InfoCard, PageCta, SectionHeader } from "@/components/site/page-primitives";
 import { StatsSection } from "@/components/sections/stats";
@@ -285,50 +286,6 @@ function resolveHomePageContent(source: HomePageContent): HomePageContent {
    ══════════════════════════════════════════════════════════════════ */
 
 /* 3D tilt card on mouse move */
-function TiltCard({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const rotateX = useMotionValue(0);
-  const rotateY = useMotionValue(0);
-  const springX = useSpring(rotateX, { stiffness: 200, damping: 20 });
-  const springY = useSpring(rotateY, { stiffness: 200, damping: 20 });
-
-  const handleMouse = (e: React.MouseEvent) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    rotateX.set(y * -8);
-    rotateY.set(x * 8);
-  };
-
-  const handleLeave = () => {
-    rotateX.set(0);
-    rotateY.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      style={{
-        rotateX: springX,
-        rotateY: springY,
-        transformPerspective: 800,
-      }}
-      onMouseMove={handleMouse}
-      onMouseLeave={handleLeave}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 /* Animated SVG decorative ring */
 function AnimatedRing({ className }: { className?: string }) {
   return (
@@ -820,7 +777,7 @@ export function HomePage({
                 const Icon = service.icon;
                 return (
                   <Reveal key={service.id} className="h-full">
-                    <article className="group relative h-full overflow-hidden rounded-2xl border border-[var(--color-text-primary)]/8 bg-white shadow-[0_1px_2px_rgba(16,24,25,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-primary-500)]/25 hover:shadow-[0_16px_40px_-20px_rgba(16,24,25,0.18)]">
+                    <TiltCard className="group relative h-full overflow-hidden rounded-2xl border border-[var(--color-text-primary)]/8 bg-white shadow-[0_1px_2px_rgba(16,24,25,0.03)] transition-all duration-300 hover:border-[var(--color-primary-500)]/25 hover:shadow-[0_16px_40px_-20px_rgba(16,24,25,0.18)]">
                       <div className="relative h-44 overflow-hidden">
                         <Image
                           src={PATH_PHOTOS[index % PATH_PHOTOS.length]}
@@ -853,7 +810,7 @@ export function HomePage({
                         </Link>
                       ) : null}
                       </div>
-                    </article>
+                    </TiltCard>
                   </Reveal>
                 );
               })}
@@ -923,7 +880,7 @@ export function HomePage({
             </div>
           </div>
 
-          <TiltCard className="relative">
+          <TiltCard className="relative" glare={false}>
             <div className="relative overflow-hidden rounded-[1.75rem] border border-[var(--color-primary-500)]/15 bg-[var(--color-primary-50)] p-9">
               <AnimatedRing className="absolute -right-20 -top-20 h-64 w-64 opacity-40" />
               <div className="relative">
