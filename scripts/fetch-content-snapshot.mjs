@@ -24,18 +24,30 @@ async function get(path) {
   return json?.data ?? json;
 }
 
+// Structured pages that hard-error (not just empty) when the API is down —
+// snapshot them so the site keeps rendering real content during an outage.
+const PAGE_SLUGS = [
+  "home", "corporate", "events", "gallery", "contact",
+  "faq", "careers", "blog", "testimonials", "site-header", "site-footer",
+];
+
 try {
-  const [brandSettings, menuCategories, locations] = await Promise.all([
+  const [brandSettings, menuCategories, locations, pageList] = await Promise.all([
     get("/content/brand-settings"),
     get("/menu/categories").catch(() => null),
     get("/locations").catch(() => null),
+    Promise.all(
+      PAGE_SLUGS.map(async (slug) => [slug, await get(`/content/pages/${slug}`).catch(() => null)]),
+    ),
   ]);
+  const pages = Object.fromEntries(pageList.filter(([, value]) => value));
   const snapshot = {
     generatedAt: new Date().toISOString(),
     apiBase: BASE,
     brandSettings,
     menuCategories,
     locations,
+    pages,
   };
   await writeFile(OUT, JSON.stringify(snapshot, null, 2) + "\n");
   console.log(`snapshot written: ${OUT}`);

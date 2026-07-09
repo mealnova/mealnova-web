@@ -2,6 +2,13 @@ import { getBrandSettings, getPageBySlug, type ContentPage } from "@/lib/api";
 import { resolveTemplateValue } from "@/lib/content-templating";
 import { logCmsRuntimeIssue } from "@/lib/cms-runtime";
 import { parseStructuredPageDocument } from "@mealnova/shared";
+import snapshot from "@/content/snapshot.json";
+
+/** Committed outage fallback for structured pages (see scripts/fetch-content-snapshot.mjs). */
+function snapshotPage(slug: string): ContentPage | null {
+  const pages = (snapshot as { pages?: Record<string, ContentPage> }).pages;
+  return pages?.[slug] ?? null;
+}
 
 function localizedValue(page: ContentPage, locale: string): string {
   if (locale === "hi") {
@@ -38,7 +45,7 @@ export async function loadStructuredPageContent<T>(
     page = await getPageBySlug(slug, { routePath });
   } catch (error) {
     logCmsRuntimeIssue(`structured-page:${slug}:page`, error);
-    return null;
+    page = snapshotPage(slug); // API outage → serve the committed snapshot, not a hard error
   }
 
   if (!page) return null;
