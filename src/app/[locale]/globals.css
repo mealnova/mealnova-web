@@ -64,10 +64,9 @@
   --font-body: "Manrope", "Noto Sans Devanagari", system-ui, sans-serif;
   --font-display: "Instrument Serif", "Noto Sans Devanagari", Georgia, serif;
 
-  /* Editorial fluid type scale — vw-driven, ceilings only near ~2500px so the
-     headline keeps scaling on large/ultrawide monitors too (no static top range) */
-  --fs-hero: clamp(2.75rem, 5.4vw, 8.5rem);
-  --fs-section: clamp(1.9rem, 3.3vw, 5rem);
+  /* Editorial fluid type scale — scales with viewport, capped at a readable size */
+  --fs-hero: clamp(2.5rem, 4.6vw, 5rem);
+  --fs-section: clamp(1.8rem, 3vw, 3rem);
 
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
@@ -92,9 +91,9 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Fluid: tracks the viewport (94vw) up to a 2400px cap — full tracking on every
-     monitor incl. 2560/ultrawide, so resizing always reflows content (no dead zone) */
-  --container-max: min(94vw, 2400px);
+  /* Fluid: content width tracks the viewport (92vw) up to a readable 1500px cap,
+     so it reflows on resize without becoming an over-wide ribbon on big screens */
+  --container-max: min(92vw, 1500px);
   --container-narrow: 720px;
 }
 
