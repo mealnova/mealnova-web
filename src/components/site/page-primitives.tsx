@@ -180,11 +180,12 @@ export function InfoCard({
   return (
     <TiltCard
       max={6}
+      restX={5}
       className={cn(
-        "group relative h-full overflow-hidden rounded-2xl p-7 transition-all duration-300",
+        "group relative h-full overflow-hidden rounded-2xl p-7 transition-shadow duration-300",
         dark
-          ? "text-white shadow-[0_24px_60px_-30px_rgba(0,0,0,0.5)]"
-          : "border border-[var(--color-text-primary)]/8 bg-white shadow-[0_1px_2px_rgba(16,24,25,0.03)] hover:border-[var(--color-primary-500)]/25 hover:shadow-[0_18px_44px_-22px_rgba(16,24,25,0.18)]",
+          ? "text-white shadow-[0_26px_60px_-22px_rgba(0,0,0,0.55)]"
+          : "border border-[var(--color-text-primary)]/8 bg-white shadow-[0_20px_44px_-20px_rgba(16,24,25,0.32),0_6px_14px_-8px_rgba(16,24,25,0.12)] hover:border-[var(--color-primary-500)]/25 hover:shadow-[0_34px_66px_-24px_rgba(16,24,25,0.44)]",
         className,
       )}
       style={dark ? { background: "linear-gradient(145deg, var(--dp-from), var(--dp-to))" } : undefined}

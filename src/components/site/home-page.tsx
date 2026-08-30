@@ -777,7 +777,7 @@ export function HomePage({
                 const Icon = service.icon;
                 return (
                   <Reveal key={service.id} className="h-full">
-                    <TiltCard className="group relative h-full overflow-hidden rounded-2xl border border-[var(--color-text-primary)]/8 bg-white shadow-[0_1px_2px_rgba(16,24,25,0.03)] transition-all duration-300 hover:border-[var(--color-primary-500)]/25 hover:shadow-[0_16px_40px_-20px_rgba(16,24,25,0.18)]">
+                    <TiltCard restX={5} className="group relative h-full overflow-hidden rounded-2xl border border-[var(--color-text-primary)]/8 bg-white shadow-[0_20px_44px_-20px_rgba(16,24,25,0.32),0_6px_14px_-8px_rgba(16,24,25,0.12)] transition-shadow duration-300 hover:border-[var(--color-primary-500)]/25 hover:shadow-[0_34px_66px_-24px_rgba(16,24,25,0.44)]">
                       <div className="relative h-44 overflow-hidden">
                         <Image
                           src={PATH_PHOTOS[index % PATH_PHOTOS.length]}

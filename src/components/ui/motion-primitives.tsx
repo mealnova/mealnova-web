@@ -175,16 +175,19 @@ export function TiltCard({
   style,
   max = 7,
   glare = true,
+  restX = 0,
 }: {
   children: ReactNode;
   className?: string;
   style?: React.CSSProperties;
   max?: number;
   glare?: boolean;
+  /** Resting rotateX (deg) so the card sits dimensional even before hover. */
+  restX?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
-  const rx = useMotionValue(0);
+  const rx = useMotionValue(restX);
   const ry = useMotionValue(0);
   const gx = useMotionValue(50);
   const gy = useMotionValue(50);
@@ -210,7 +213,7 @@ export function TiltCard({
     gy.set(py * 100);
   }
   function onLeave() {
-    rx.set(0);
+    rx.set(restX);
     ry.set(0);
     gx.set(50);
     gy.set(50);
