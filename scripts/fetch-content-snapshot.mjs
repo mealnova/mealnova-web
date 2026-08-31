@@ -27,8 +27,9 @@ async function get(path) {
 // Structured pages that hard-error (not just empty) when the API is down —
 // snapshot them so the site keeps rendering real content during an outage.
 const PAGE_SLUGS = [
-  "home", "corporate", "events", "gallery", "contact",
-  "faq", "careers", "blog", "testimonials", "site-header", "site-footer",
+  "home", "menu", "locations", "corporate", "events", "gallery", "about", "contact",
+  "faq", "careers", "blog", "testimonials", "order",
+  "privacy-policy", "terms-of-service", "refund-policy", "site-header", "site-footer",
 ];
 
 try {
