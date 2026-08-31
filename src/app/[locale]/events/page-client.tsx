@@ -57,7 +57,7 @@ const EVENT_SEARCH_FAQS = [
     icon: Sparkles,
     title: "Do you provide event catering services in Pune for weddings and corporate events?",
     description:
-      "Yes. We cater pure vegetarian weddings, receptions, corporate events, conferences, launches, society functions, and family celebrations across Pune.",
+      "Yes. We cater multi-cuisine weddings, receptions, corporate events, conferences, launches, society functions, and family celebrations across Pune.",
   },
   {
     icon: CalendarDays,
@@ -67,9 +67,9 @@ const EVENT_SEARCH_FAQS = [
   },
   {
     icon: Building2,
-    title: "Does the site support vegetarian buffet planning for Pune events?",
+    title: "Does the site support buffet planning for Pune events?",
     description:
-      "Yes. We plan vegetarian buffet service, live counters, Jain-friendly options, staff flow, and timing for Pune events and workplace celebrations.",
+      "Yes. We plan buffet service, live counters, Jain-friendly options, staff flow, and timing for Pune events and workplace celebrations.",
   },
 ] as const;
 const EVENT_GST_RATE = 0.18;
@@ -988,7 +988,7 @@ export default function EventsPage({
                     key={cuisine.id}
                     icon={cuisine.isLiveCounter ? Sparkles : ChefHat}
                     title={cuisine.name}
-                    description={cuisine.description ?? "Vegetarian event menu option."}
+                    description={cuisine.description ?? "Event menu option."}
                     eyebrow={
                       cuisine.isLiveCounter
                         ? content.cuisines.liveCountersEyebrow
@@ -1079,7 +1079,7 @@ export default function EventsPage({
             <SectionHeader
               eyebrow="Event catering FAQ"
               title="What planners usually ask before choosing event catering in Pune"
-              description="Get answers to common questions about vegetarian menus, pricing, guest capacity, and how to plan your next celebration."
+              description="Get answers to common questions about menus, pricing, guest capacity, and how to plan your next celebration."
               align="center"
             />
             <div className="mt-12 grid gap-5 lg:grid-cols-3">

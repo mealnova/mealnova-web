@@ -87,9 +87,9 @@ const searchServiceHighlights = [
   },
   {
     icon: CalendarRange,
-    title: "Event catering and vegetarian menus",
+    title: "Event catering and menus",
     description:
-      "Wedding catering, corporate event catering, buffet planning, and pure vegetarian menus for launches, conferences, and celebrations.",
+      "Wedding catering, corporate event catering, buffet planning, and multi-cuisine menus for launches, conferences, and celebrations.",
   },
   {
     icon: MapPin,
@@ -117,7 +117,7 @@ const searchFaqs = [
 ] as const;
 const SEO_HERO_TITLE = "Corporate catering services in Pune for teams and events";
 const SEO_HERO_DESCRIPTION =
-  "Mealnova provides corporate catering services in Pune, office meal programs, cafeteria management, and vegetarian event catering for workplaces and celebrations across Baner, Balewadi, Hinjewadi, Wakad, Kharadi, and Magarpatta.";
+  "Mealnova provides corporate catering services in Pune, office meal programs, cafeteria management, and event catering for workplaces and celebrations across Baner, Balewadi, Hinjewadi, Wakad, Kharadi, and Magarpatta.";
 
 export interface HomePageContent {
   hero: CmsHeroContent;

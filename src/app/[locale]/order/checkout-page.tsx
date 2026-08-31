@@ -526,7 +526,7 @@ export function CheckoutPage() {
                           <span className="font-bold text-[var(--color-primary-500)]">₹{item.price}</span>
                           {item.isVegan ? <Badge variant="vegan">Vegan</Badge> : null}
                           {item.isJain ? <Badge variant="jain">Jain</Badge> : null}
-                          {!item.isVegan && !item.isJain ? <Badge variant="veg">Pure Veg</Badge> : null}
+                          {!item.isVegan && !item.isJain ? <Badge variant="veg">Veg</Badge> : null}
                         </div>
                       </div>
 

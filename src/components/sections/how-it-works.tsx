@@ -66,7 +66,7 @@ export function HowItWorksSection() {
             transition={{ duration: 0.45, delay: 0.15 }}
             className="text-[var(--color-text-secondary)] max-w-xl mx-auto"
           >
-            Getting quality vegetarian meals for your workplace has never been easier.
+            Getting quality meals for your workplace has never been easier.
           </motion.p>
         </div>
 

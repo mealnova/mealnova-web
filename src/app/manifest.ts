@@ -11,7 +11,7 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
     name: brand.siteName,
     short_name: brand.siteName,
     description:
-      "Corporate catering services in Pune, office meal programs, cafeteria management, and vegetarian event catering.",
+      "Corporate catering services in Pune, office meal programs, cafeteria management, and event catering.",
     start_url: "/en",
     scope: "/",
     display: "standalone",

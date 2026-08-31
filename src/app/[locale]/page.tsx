@@ -17,14 +17,14 @@ import { loadStructuredPageContent, loadStructuredPageSeo } from "@/lib/structur
 const HOME_SEO = {
   title: "Corporate Catering Services in Pune",
   description:
-    "Mealnova provides corporate catering services in Pune, office meal programs, cafeteria management, and vegetarian event catering across Baner, Balewadi, Hinjewadi, Wakad, Kharadi, and Magarpatta.",
+    "Mealnova provides corporate catering services in Pune, office meal programs, cafeteria management, and event catering across Baner, Balewadi, Hinjewadi, Wakad, Kharadi, and Magarpatta.",
   keywords: [
     "corporate catering pune",
     "catering services pune",
     "office catering pune",
     "cafeteria management pune",
     "event catering pune",
-    "vegetarian catering pune",
+    "multi-cuisine catering pune",
   ],
 } as const;
 const HOME_FAQ_ENTRIES = [

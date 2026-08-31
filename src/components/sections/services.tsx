@@ -56,7 +56,7 @@ export function ServicesSection() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="body-large max-w-2xl mx-auto"
           >
-            From daily office meals to grand celebrations — pure vegetarian
+            From daily office meals to grand celebrations — multi-cuisine
             expertise on every plate.
           </motion.p>
         </div>

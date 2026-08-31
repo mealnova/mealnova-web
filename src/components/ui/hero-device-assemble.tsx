@@ -35,7 +35,7 @@ function MockUI({
   badges = [],
   brandLabel = "Event desk",
   metrics = [],
-  subtitle = "Vegetarian menu planning, crew timing, and service notes in one review.",
+  subtitle = "Menu planning, crew timing, and service notes in one review.",
   title = "Event planning board",
 }: {
   accentColor: string;
@@ -50,7 +50,7 @@ function MockUI({
       ? metrics.slice(0, 3)
       : [
           { label: "Guests", value: "500+" },
-          { label: "Menus", value: "Pure veg" },
+          { label: "Menus", value: "Veg" },
           { label: "Timing", value: "Live" },
         ];
   const displayBadges =

@@ -12,28 +12,28 @@ import { loadStructuredPageContent } from "@/lib/structured-page-server";
 import EventsPageClient, { type EventsPageContent } from "./page-client";
 
 const EVENTS_SEO = {
-  title: "Pure Vegetarian Event Catering in Pune",
+  title: "Multi-Cuisine Event Catering in Pune",
   description:
-    "Pure vegetarian catering in Pune for weddings, corporate events, conferences, family functions, live counters, and celebrations.",
+    "multi-cuisine catering in Pune for weddings, corporate events, conferences, family functions, live counters, and celebrations.",
   keywords: [
     "event catering pune",
     "wedding catering pune",
     "corporate event catering pune",
-    "vegetarian catering pune",
+    "multi-cuisine catering pune",
     "buffet catering pune",
   ],
   serviceTypes: [
     "Event catering",
     "Wedding catering",
     "Corporate event catering",
-    "Vegetarian buffet catering",
+    "Buffet catering",
   ],
 } as const;
 const EVENTS_FAQ_ENTRIES = [
   {
     question: "Do you provide event catering services in Pune?",
     answer:
-      "Yes. Hanuman Caterers provides pure vegetarian catering in Pune for weddings, receptions, corporate events, launches, conferences, and family celebrations.",
+      "Yes. Hanuman Caterers provides multi-cuisine catering in Pune for weddings, receptions, corporate events, launches, conferences, and family celebrations.",
   },
   {
     question: "Can I share event details online before speaking to the team?",
@@ -41,9 +41,9 @@ const EVENTS_FAQ_ENTRIES = [
       "Yes. Share the date, venue, guest count, and menu preferences so the first call can focus on availability, service style, and the right menu plan.",
   },
   {
-    question: "Do you support vegetarian catering and buffet planning?",
+    question: "Do you support catering and buffet planning?",
     answer:
-      "Yes. We plan vegetarian buffet service, live counters, Jain-friendly options, staff flow, and timing for Pune celebrations and corporate gatherings.",
+      "Yes. We plan buffet service, live counters, Jain-friendly options, staff flow, and timing for Pune celebrations and corporate gatherings.",
   },
 ] as const;
 
@@ -89,7 +89,7 @@ export default async function EventsPageRoute({
     locale === "en"
       ? buildBreadcrumbJsonLd([
           { name: brand?.siteName ?? "Hanuman Caterers", path: "/en" },
-          { name: "Pure Vegetarian Event Catering in Pune", path: routePath },
+          { name: "Multi-Cuisine Event Catering in Pune", path: routePath },
         ])
       : null;
 

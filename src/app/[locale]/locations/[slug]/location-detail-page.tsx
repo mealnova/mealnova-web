@@ -289,7 +289,7 @@ export function LocationDetailPage({ slug }: LocationDetailPageProps) {
                           {item.isVegan && <Badge variant="vegan">Vegan</Badge>}
                           {item.isJain && <Badge variant="jain">Jain</Badge>}
                           {!item.isVegan && !item.isJain && (
-                            <Badge variant="success">Pure Veg</Badge>
+                            <Badge variant="success">Veg</Badge>
                           )}
                         </div>
                       </div>
